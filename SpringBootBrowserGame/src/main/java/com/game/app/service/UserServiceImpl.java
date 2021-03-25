@@ -2,6 +2,8 @@ package com.game.app.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +37,14 @@ public class UserServiceImpl implements IUserService {
 	
 	
 	@Override
+	@Transactional
 	public void createNewUser(User user) {
-		//gameProfileOfThisUser.setUser(user);
-		userDao.save(user);		
 		GameProfile gameProfileOfThisUser = new GameProfile(user);
-		
+		gameProfileOfThisUser.setUser(user);
+		user.setGameProfile(gameProfileOfThisUser);
+
+		userDao.save(user);		
 		gameProfileDao.save(gameProfileOfThisUser);	
-		user.setGameProfile(gameProfileOfThisUser);		
 		
 	}
 }

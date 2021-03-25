@@ -19,7 +19,7 @@ public class GameProfile {
 
 	// Resources
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "game_profile", updatable = false, nullable = false)
 	private User user;
 

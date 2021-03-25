@@ -22,7 +22,7 @@ public class User {
 	private String username;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user", updatable = false, nullable = true)
+	@JoinColumn(name = "user", updatable = false, nullable = false)
 	private GameProfile gameProfile;
 
 	public User() {
@@ -30,7 +30,7 @@ public class User {
 	
 	public User(String username) {
 		this.username = username;
-	//	this.gameProfile = new GameProfile();
+		this.gameProfile = new GameProfile();
 	}
 
 	public String getUsername() {
