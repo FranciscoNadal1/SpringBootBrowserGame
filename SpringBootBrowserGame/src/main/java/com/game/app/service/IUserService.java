@@ -10,5 +10,6 @@ public interface IUserService {
 
 
 	public List<User> listAllUsers();
-	public void createNewUser(User user);
+	public void saveOrEditUser(User user);
+	
 }

@@ -1,7 +1,11 @@
 package com.game.app.entity;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+import java.util.Map;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,24 +13,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.transaction.Transactional;
 
+import com.game.app.entity.parent.IBuilding;
+
 @Entity
 @Transactional
-public class GameProfile {
+public class GameProfile implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+/*
+	@Column(nullable = true)
+	Map<String, IBuilding> constructedBuildings;
+*/
+	
+	
 	// Resources
-
-	@OneToOne
-	@JoinColumn(name = "game_profile", updatable = false, nullable = false)
+/*
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "game_profile", updatable = false, nullable = true)
 	private User user;
-
+*/
+	 @OneToOne(fetch = FetchType.LAZY, optional = false)
+	    @JoinColumn(name = "user_id", nullable = false)
+	    private User user;
+	 
+	 
 	private int wood;
 	private int rock;
 	private int steel;
-	private int food;
+	private int food; 
 
 	//////////////////
 
@@ -46,20 +67,11 @@ public class GameProfile {
 		this.steelGrowthRate = 5;
 		this.foodGrowthRate = 10;
 	}
-	
 	public GameProfile(User user) {
-		this.wood = 0;
-		this.rock = 0;
-		this.steel = 0;
-		this.food = 0;
-
-		this.woodGrowthRate = 50;
-		this.rockGrowthRate = 20;
-		this.steelGrowthRate = 5;
-		this.foodGrowthRate = 10;
-		
+		this();
 		this.user = user;
 	}
+
 	///////////////////////
 	public int getWood() {
 		return wood;

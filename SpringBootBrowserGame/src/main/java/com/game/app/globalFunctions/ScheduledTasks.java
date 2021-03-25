@@ -28,12 +28,13 @@ public class ScheduledTasks {
 	//	System.out.println("Updating");
 		
 		List<User> listUsers = userService.listAllUsers();
-
-		for(User user : listUsers) {
-			user.getGameProfile().resourcesGrow();
-			userService.createNewUser(user);
-		}
-		log.info("Resources updated at :  {}", dateFormat.format(new Date()));
+		
+		if(!listUsers.isEmpty())
+			for(User user : listUsers) {
+				user.getGameProfile().resourcesGrow();
+				userService.saveOrEditUser(user);
+			}
+		log.info("Resource update finished at :  {}", dateFormat.format(new Date()));
 	}
 
 }

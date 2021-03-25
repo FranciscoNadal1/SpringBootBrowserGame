@@ -1,16 +1,23 @@
 package com.game.app.globalFunctions;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import com.game.app.dao.IUser;
 import com.game.app.entity.User;
-import com.game.app.service.IUserService;
 
 @Component
 public class GlobalFunctions {
 
 
+	@Autowired
+	private IUser userDao;
+	
+	@EventListener(ApplicationReadyEvent.class)
+	public void mockNewUser() {
+		User user = new User("admin");		
+		userDao.save(user);
+	}
 }

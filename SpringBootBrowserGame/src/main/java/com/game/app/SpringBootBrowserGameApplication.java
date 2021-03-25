@@ -11,5 +11,6 @@ public class SpringBootBrowserGameApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootBrowserGameApplication.class, args);
 	}
+	
 
 }

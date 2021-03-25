@@ -1,38 +1,55 @@
 package com.game.app.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.game.app.dao.IGameProfile;
-
 @Entity
-public class User {
+public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String username;
-	
+	/*
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user", updatable = false, nullable = false)
+	@JoinColumn(name = "user", updatable = false, nullable = true)
 	private GameProfile gameProfile;
-
+*/
+	
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "user")
+    private GameProfile gameProfile;
+	
+	
 	public User() {
 	}
 	
 	public User(String username) {
 		this.username = username;
-		this.gameProfile = new GameProfile();
+		this.gameProfile = new GameProfile(this);
+	}
+////////////////////////////////////////////////////////////////////
+	
+
+	public int getId() {
+		return id;
 	}
 
+	
 	public String getUsername() {
 		return username;
 	}

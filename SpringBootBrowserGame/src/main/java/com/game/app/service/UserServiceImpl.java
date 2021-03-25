@@ -17,6 +17,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	public IUser userDao;
+	
 	@Autowired
 	public IGameProfile gameProfileDao;
 	
@@ -35,16 +36,11 @@ public class UserServiceImpl implements IUserService {
 //	daoUser.save(user);
 //	daoGameProfile.save(gameProfile);		
 	
-	
-	@Override
-	@Transactional
-	public void createNewUser(User user) {
-		GameProfile gameProfileOfThisUser = new GameProfile(user);
-		gameProfileOfThisUser.setUser(user);
-		user.setGameProfile(gameProfileOfThisUser);
 
-		userDao.save(user);		
-		gameProfileDao.save(gameProfileOfThisUser);	
-		
-	}
+	
+	public void saveOrEditUser(User user) {		
+		userDao.save(user);				
+	}	
+	
+	
 }
