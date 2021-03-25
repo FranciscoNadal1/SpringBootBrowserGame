@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="layout/layout :: head">
 <body>
 
 
 	<header th:replace="commons/resourceBar.html"></header>
-<div>asdf</div>
+	<div><h2>Buildings</h2></div>
+	<div id="buildings" class="row">
+		<div id="Farm" class="col-3">
+			<div class="buildingText h5">Farm</div>
+			<div class="buildingLevel">Level : </div>
+			<a href="https://plaholder.com"><img
+				src="https://via.placeholder.com/150"></a>
+				
+			<div class="updateBuilding"><input type="submit" value="update"></div>
+		</div>
+		<div id="Quarry" class="col-3">
+			<div class="buildingText h5">Quarry</div>
+			<div class="buildingLevel">Level : </div>
+			<a href="https://plaholder.com"><img
+				src="https://via.placeholder.com/150"></a>
+			<div class="updateBuilding"><input type="submit" value="update"></div>
+		</div>
+		<div id="Forge" class="col-3">
+			<div class="buildingText h5">Forge</div>
+			<div class="buildingLevel">Level : </div>
+			<a href="https://plaholder.com"><img
+				src="https://via.placeholder.com/150"></a>
+			<div class="updateBuilding"><input type="submit" value="update"></div>
+		</div>
+		<div id="Sawmill" class="col-3">
+			<div class="buildingText h5">Sawmill</div>
+			<div class="buildingLevel">Level : </div>
+			<a href="https://plaholder.com"><img
+				src="https://via.placeholder.com/150"></a>
+			<div class="updateBuilding"><input type="submit" value="update"></div>
+		</div>
+	</div>
 </body>
 </html>

@@ -1,6 +1,24 @@
-<div th:fragment="menu">
-	<div th:text="'Wood : ' + ${game.wood}"></div>
-	<div th:text="'Steel : ' + ${game.steel}"></div>
-	<div th:text="'Rock : ' + ${game.rock}"></div>
-	<div th:text="'Food : ' + ${game.food}"></div>
+<div id="Resources" th:fragment="resources">
+	<div class="woodResource">
+		<span th:text="'Wood : ' + ${game.wood}"></span>
+		<span th:text="'(' + ${game.woodGrowthRate} + ')'"></span>
+		<span th:text="' / ' + ${game.maxWoodStored}"></span>
+	</div>
+	<div class="steelResource">
+		<span th:text="'Steel : ' + ${game.steel}"></span>
+		<span th:text="'(' + ${game.steelGrowthRate} + ')'"></span>
+		<span th:text="' / ' + ${game.maxSteelStored}"></span>
+	
+	</div>
+	<div class="rockResource">
+		<span th:text="'Rock : ' + ${game.rock}"></span>
+		<span th:text="'(' + ${game.rockGrowthRate} + ')'"></span>
+		<span th:text="' / ' + ${game.maxRockStored}"></span>
+	
+	</div>
+	<div class="foodResource">	
+		<span th:text="'Food : ' + ${game.food}"></span>
+		<span th:text="'(' + ${game.foodGrowthRate} + ')'"></span>
+		<span th:text="' / ' + ${game.maxFoodStored}"></span>
+	</div>
 </div>

@@ -41,6 +41,12 @@ public class User implements Serializable{
 	public User(String username) {
 		this.username = username;
 		this.gameProfile = new GameProfile(this);
+		
+
+		
+		//newKingdom.setGameProfile(this);
+	//	this.gameProfile.getKingdomList().add(new Kingdom("asdf"));
+		
 	}
 ////////////////////////////////////////////////////////////////////
 	
