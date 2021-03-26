@@ -1,5 +1,7 @@
 package com.game.app.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,9 @@ import com.game.app.entity.Building;
 import com.game.app.entity.Kingdom;
 import com.game.app.entity.User;
 import com.game.app.entity.buildings.Farm;
+import com.game.app.entity.buildings.Forge;
+import com.game.app.entity.buildings.Quarry;
+import com.game.app.entity.buildings.Sawmill;
 import com.game.app.service.IBuildingService;
 import com.game.app.service.IUserService;
 
@@ -38,6 +43,8 @@ public class GameController {
 	@GetMapping(value = "/test")
 	public String test(Model model) {
 		User currentUser = userDao.findById(1);
+		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
+		Map<String, Building> buildings= currentKingdom.getBuildings();
 		
 //		currentUser.getGameProfile().getKingdomList()
 /*
@@ -46,12 +53,15 @@ public class GameController {
 */		
 		
 		model.addAttribute("game", currentUser.getGameProfile());
+		model.addAttribute("buildings", buildings);
+		model.addAttribute("kingdom", currentKingdom);
 		
 		return "test";
 	}
 
-	@GetMapping(value = "/buildFarm")
-	public String buildFarm(Model model) {
+	@GetMapping(value = "/build/{building}")
+	public String buildFarm(Model model, @PathVariable(value = "building") String building) {
+		
 		User currentUser = userDao.findById(1);
 
 	//	currentUser.getGameProfile()currentUser
@@ -69,9 +79,25 @@ public class GameController {
 //		kingdomDao.fi
 		
 //	currentUser.getGameProfile().
-		Building newFarm = new Farm();
-		newFarm.setKingdom(currentKingdom);
-		buildingServiceDao.save(newFarm);
+		Building newBuilding = null;
+		switch(building) {
+		  case "Farm":
+				 newBuilding = new Farm();
+		    break;
+		  case "Quarry":
+				 newBuilding = new Quarry();
+		    break;
+		  case "Forge":
+				 newBuilding = new Forge();
+		    break;
+		  case "Sawmill":
+				 newBuilding = new Sawmill();
+		    break;
+		  default:
+				 newBuilding = new Farm();
+		}
+		newBuilding.setKingdom(currentKingdom);
+		buildingServiceDao.save(newBuilding);
 
 		return "redirect:/test";
 	}
@@ -80,11 +106,16 @@ public class GameController {
 		User currentUser = userDao.findById(1);
 		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
 		
+		Building levelingUpBuilding = currentKingdom.getBuildings().get(building);
+		System.out.println(levelingUpBuilding.getHp());
+		System.out.println(levelingUpBuilding.getLevel());
+		System.out.println(levelingUpBuilding.getHp());
+		/*
 		Building farm = new Farm();
 		farm = buildingDao.findByName("farm");
-
-		farm.levelUp();
-		buildingServiceDao.save(farm);
+*/
+		levelingUpBuilding.levelUp();
+		buildingServiceDao.save(levelingUpBuilding);
 
 		return "redirect:/test";
 	}	

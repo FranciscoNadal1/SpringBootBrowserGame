@@ -1,6 +1,5 @@
 package com.game.app.entity;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 
 
@@ -27,6 +27,12 @@ public class Kingdom {
 	@ManyToOne
 	@JoinColumn(name = "gameProfile_id", referencedColumnName = "id")	
 	private GameProfile gameProfile;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
+//	@MapKeyJoinColumn(name="name")
+	@MapKey(name = "name")
+	private Map<String, Building> buildings;
 	
 /*	
 	@OneToMany
@@ -56,15 +62,15 @@ public class Kingdom {
 	
 	public String getKingdomName() {
 		return kingdomName;
-	}/*
-	public List<Building> getBuildings() {
+	}
+	public Map<String,Building> getBuildings() {
 		return buildings;
 	}
 
-	public void setBuilding(List<Building> building) {
+	public void setBuilding(Map<String,Building> building) {
 		this.buildings = building;
 	}
-	*/
+	
 /*
 	public Map<String, Building> getBuildings() {
 		return buildings;

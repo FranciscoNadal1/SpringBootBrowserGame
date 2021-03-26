@@ -1,26 +1,26 @@
 package com.game.app.entity.buildings;
 
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 
 import com.game.app.entity.Building;
 import com.game.app.entity.GameProfile;
 
 @Entity
-public class Farm extends Building {
+public class Sawmill extends Building {
 
-	public Farm() {
-		this.hp = 500;
+	public Sawmill() {
+		this.hp = 2500;
 		this.level = 1;
-		this.name = "Farm";
+		this.name = "Sawmill";
 	}
 
-	String description = "Make food";
 	int maxLevel = 30;
 
-	int baseWoodCost = 300;
-	int baseRockCost = 50;
-	int baseSteelCost = 20;
+	String description = "Chop da trees";
+
+	int baseWoodCost = 40;
+	int baseRockCost = 500;
+	int baseSteelCost = 100;
 
 	public void levelUp() {
 		GameProfile gameProfile = super.getKingdom().getGameProfile();
