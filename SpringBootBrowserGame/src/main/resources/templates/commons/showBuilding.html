@@ -12,24 +12,33 @@
 		<img th:src="${building.portrait}"/>
 </div>
 		<div class="buildingDescription"><span th:text="${building.description}"></span></div>
+		
+		
+		<!-- 
+<p class="card-text" th:text="${T(com.blog.project.app.utils.LocalUtils).formatContentForList(post.content)}"></p>
+		 -->
 		<div class="buildingImprovementRequirementsTitle">Improve Requirements :</div>
 		<div class="buildingImprovementRequirements">
-			<div>
+		
+		<div ></div>
+		 
+			<div th:if="${T(com.game.app.singleton.StaticRequirementsSingleton).getInstance().getStaticRequirementsFromNameAndLevel(building.name,building.level+1).getWood > 0}">
 				<img class="float-left" alt="wood" width="20" height="20"
 					src="https://cdn3.iconfinder.com/data/icons/random-4/96/wood-trunk-log-camping-nature-resource-512.png" />
-				<span th:text="${building.getBaseWoodCost} * ${building.level+1}" />
+				<span th:text="${T(com.game.app.singleton.StaticRequirementsSingleton).getInstance().getStaticRequirementsFromNameAndLevel(building.name,building.level+1).getWood}" />
 			</div>
-			<div>
+			<div th:if="${T(com.game.app.singleton.StaticRequirementsSingleton).getInstance().getStaticRequirementsFromNameAndLevel(building.name,building.level+1).getSteel > 0}">
 				<img class="float-left" alt="rock" width="20" height="20"
 					src="https://img.icons8.com/emoji/452/rock-emoji.png" /> <span
-					th:text="${building.getBaseRockCost} * ${building.level+1}" />
+					th:text="${T(com.game.app.singleton.StaticRequirementsSingleton).getInstance().getStaticRequirementsFromNameAndLevel(building.name,building.level+1).getRock}" />
 			</div>
 
-			<div>
+			<div th:if="${T(com.game.app.singleton.StaticRequirementsSingleton).getInstance().getStaticRequirementsFromNameAndLevel(building.name,building.level+1).getSteel > 0}">
 				<img class="float-left" alt="steel" width="20" height="20"
 					src="https://img.icons8.com/plasticine/2x/fa314a/metal.png" /> <span
-					th:text="${building.getBaseSteelCost} * ${building.level+1}" />
+					th:text="${T(com.game.app.singleton.StaticRequirementsSingleton).getInstance().getStaticRequirementsFromNameAndLevel(building.name,building.level+1).getSteel}" />
 			</div>
+			
 		</div>
 		<div class="updateBuilding">
 

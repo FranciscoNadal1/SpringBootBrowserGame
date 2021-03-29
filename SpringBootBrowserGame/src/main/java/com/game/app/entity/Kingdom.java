@@ -107,10 +107,10 @@ public class Kingdom {
 		kingdomName = user + "'s kingdom";
 		
 		
-		this.baseWoodGrowthRate = 50;
-		this.baseRockGrowthRate = 20;
-		this.baseSteelGrowthRate = 5;
-		this.baseFoodGrowthRate = 10;
+		this.baseWoodGrowthRate = 500;
+		this.baseRockGrowthRate = 200;
+		this.baseSteelGrowthRate = 50;
+		this.baseFoodGrowthRate = 100;
 ////////
 		
 		this.maxWoodStored = 10000;

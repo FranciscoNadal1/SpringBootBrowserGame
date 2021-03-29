@@ -6,15 +6,19 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import com.game.app.dao.IKingdom;
+import com.game.app.dao.IRequirements;
 import com.game.app.dao.IUser;
 import com.game.app.entity.Building;
 import com.game.app.entity.Kingdom;
+import com.game.app.entity.Requirements;
 import com.game.app.entity.User;
 import com.game.app.entity.buildings.Farm;
 import com.game.app.entity.buildings.Forge;
 import com.game.app.entity.buildings.Quarry;
 import com.game.app.entity.buildings.Sawmill;
 import com.game.app.service.IBuildingService;
+import com.game.app.service.IRequirementsService;
+import com.game.app.singleton.StaticRequirementsSingleton;
 
 @Component
 public class GlobalFunctions {
@@ -28,6 +32,12 @@ public class GlobalFunctions {
 
 	@Autowired
 	private IBuildingService buildingService;
+	
+	@Autowired
+	private IRequirementsService requirementsService;
+	
+	@Autowired
+	private static IRequirementsService staticRequirements;
 	
 	@EventListener(ApplicationReadyEvent.class)
 	public void mockNewUser() {
@@ -53,6 +63,16 @@ public class GlobalFunctions {
 		buildingService.save(newQuarry);
 		buildingService.save(newSawmill);
 		buildingService.save(newForge);
+		
+		
+		requirementsService.baseRequirements();
+		StaticRequirementsSingleton.getInstance().populate();
+		
+		//RequirementsSingleton.getInstance().populate();
+	//	RequirementsSingleton.getInstance().addToArray(new Requirements("Farm", 0, 50, 10, 0, 0)); 
+	//	RequirementsSingleton.getInstance().addToArray(new Requirements("Farm", 1, 100, 200, 10, 0)); 
+		
+		
 		
 		
 	/*	
@@ -92,5 +112,8 @@ public class GlobalFunctions {
 
 		
 	}
+	
+
+
 	
 }

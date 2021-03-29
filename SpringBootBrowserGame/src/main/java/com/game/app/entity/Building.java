@@ -1,6 +1,10 @@
 package com.game.app.entity;
 
+
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +13,23 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.game.app.singleton.StaticRequirements;
+import com.game.app.singleton.StaticRequirementsSingleton;
 
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Building{
 
+
+
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int Id;
@@ -42,8 +57,54 @@ public abstract class Building{
 		this.hp = 500;
 	}
 	////////////////////////////////////////////////////////////
+	
 	public abstract boolean canLevelUp();
 	public abstract void levelUp();
+	
+	
+	
+	
+	public void levelUp(int maxLevel) {
+		
+		StaticRequirements req = StaticRequirementsSingleton.getInstance().getStaticRequirementsFromNameAndLevel(name, level+1);
+		//StaticRequirementsSingleton.getInstance().printAllStaticRequirements();		
+		
+		
+		Kingdom currentKingdom = getKingdom();
+		if (canLevelUp(req, maxLevel)) {
+			currentKingdom.setWood(currentKingdom.getWood() - req.getWood());
+			currentKingdom.setRock(currentKingdom.getRock() - req.getRock());
+			currentKingdom.setSteel(currentKingdom.getSteel() - req.getSteel());
+
+			level++;
+			this.production += 10;
+		}
+
+	}
+	
+	public boolean canLevelUp(StaticRequirements requirements, int maxLevel) {
+
+		Kingdom currentKingdom = getKingdom();
+		if ((level+1) < maxLevel) {
+			if (requirements.getWood() <= currentKingdom.getWood() && requirements.getRock() <= currentKingdom.getRock()
+					&& requirements.getSteel() <= currentKingdom.getSteel()
+
+			)
+				return true;
+
+		}
+		return false;
+		
+	}
+	public boolean canLevelUp(int maxLevel) {		
+
+		StaticRequirements req = StaticRequirementsSingleton.getInstance().getStaticRequirementsFromNameAndLevel(name, level+1);		
+		return(canLevelUp(req, maxLevel));
+		
+	}
+	
+	
+	
 	////////////////////////////////////////////////////////////
 	
 	

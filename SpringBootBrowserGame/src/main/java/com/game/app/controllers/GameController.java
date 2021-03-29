@@ -1,5 +1,6 @@
 package com.game.app.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,15 @@ import com.game.app.dao.IKingdom;
 import com.game.app.dao.IUser;
 import com.game.app.entity.Building;
 import com.game.app.entity.Kingdom;
+import com.game.app.entity.Requirements;
 import com.game.app.entity.User;
 import com.game.app.entity.buildings.Farm;
 import com.game.app.entity.buildings.Forge;
 import com.game.app.entity.buildings.Quarry;
 import com.game.app.entity.buildings.Sawmill;
+import com.game.app.globalFunctions.GlobalFunctions;
 import com.game.app.service.IBuildingService;
+import com.game.app.service.IRequirementsService;
 import com.game.app.service.IUserService;
 
 @Controller
@@ -40,6 +44,9 @@ public class GameController {
 	@Autowired
 	private IBuildingService buildingServiceDao;
 	
+	@Autowired
+	private IRequirementsService requirementsServiceDao;
+	
 	@GetMapping(value = "/test")
 	public String test(Model model) {
 		User currentUser = userDao.findById(1);
@@ -54,7 +61,16 @@ public class GameController {
 		model.addAttribute("game", currentUser.getGameProfile());
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("kingdom", currentKingdom);
-		
+		/*
+		List<Requirements> requirements = requirementsServiceDao.getAllRequirements();	
+		Requirements req  = requirements.get(1);
+			System.out.println(req.getName() + " - " + req.getLevel());
+			*/
+	//		Requirements requ = requirementsServiceDao.getRequirementByNameAndLevel("Farm", 1);
+			
+	//	Requirements requs = GlobalFunctions.getRequirement(requ.getName(), requ.getLevel());
+	//		System.out.println("AAAAA-" + requs.getName());
+			
 		return "test";
 	}
 
