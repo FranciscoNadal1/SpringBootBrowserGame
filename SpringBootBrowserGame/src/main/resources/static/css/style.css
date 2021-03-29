@@ -1,0 +1,79 @@
+body{
+	background-color:silver;
+}
+#sidebar-wrapper{
+	
+}
+.imageBuilding{
+	height:150px;
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+	
+}
+#RealmTitle{
+	width:100%;
+	border:1px solid black;
+	font-size:14;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding-top:10px;
+	padding-left:30px;
+	padding-bottom:10px;
+}
+.building{
+	border:1px solid black;
+	padding: 0 !important;
+//	margin:5px !important;
+}
+.updateBuilding button, .buildingText, .buildingImprovementRequirementsTitle, #sidebar-wrapper,  #Resources, #RealmTitle{	
+	background-color:rgba(5,10,89,0.9) !important;
+		color:silver;	
+}
+#sidebar-wrapper .bg-light{
+	background:none !important;
+}
+a{
+	text-decoration:none;
+}
+a:hover {
+  color: silver !important;
+	text-decoration:none;
+	
+}
+.buildingDescription{
+	border-bottom:1px solid black;
+	min-height:60px;
+	
+}
+.buildingDescription, .buildingLevel, .buildingImprovementRequirements{
+	
+	background-color:rgba(15,20,99,0.5);
+}
+
+
+.buildingLevel{
+	border-top:1px solid black;
+	text-align:center;
+}
+.buildingText{
+	margin:0px;
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-left:15px;
+}
+/*//////////////////////////////////////*/
+.imageBuilding{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:black;
+    overflow: hidden;
+    
+}
+.imageBuilding img{
+  height: 300px;
+  object-fit: cover;
+}
+
+
+/*//////////////////////////////////////*/

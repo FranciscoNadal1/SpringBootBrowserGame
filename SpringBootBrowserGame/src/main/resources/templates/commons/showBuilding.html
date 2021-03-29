@@ -1,6 +1,6 @@
 <html>
-<section th:fragment="menu">
-	<div th:id="${building.name}" class="col-3">
+<div  class="col-3 " th:fragment="menu">
+	<div class="building" th:id="${building.name}">
 
 
 		<div class="buildingText h5" th:text="${building.name}"></div>
@@ -8,26 +8,25 @@
 			th:text="'Level : ' + ${building.level+1}"></div>
 		<div th:if="${building.level} == 0" class="buildingLevel"
 			th:text="'Not built'"></div>
-
-		<a href="https://plaholder.com"><img width="150px"
-			th:src="${building.portrait}"></a>
-
-		<div class="buildingDescription"></div>
-		<div>Improve Requirements :</div>
+		<div class="imageBuilding">
+		<img th:src="${building.portrait}"/>
+</div>
+		<div class="buildingDescription"><span th:text="${building.description}"></span></div>
+		<div class="buildingImprovementRequirementsTitle">Improve Requirements :</div>
 		<div class="buildingImprovementRequirements">
 			<div>
-				<img class="float-left col-5" alt="wood" width="20" height="20"
+				<img class="float-left" alt="wood" width="20" height="20"
 					src="https://cdn3.iconfinder.com/data/icons/random-4/96/wood-trunk-log-camping-nature-resource-512.png" />
 				<span th:text="${building.getBaseWoodCost} * ${building.level+1}" />
 			</div>
 			<div>
-				<img class="float-left col-5" alt="rock" width="20" height="20"
+				<img class="float-left" alt="rock" width="20" height="20"
 					src="https://img.icons8.com/emoji/452/rock-emoji.png" /> <span
 					th:text="${building.getBaseRockCost} * ${building.level+1}" />
 			</div>
 
 			<div>
-				<img class="float-left col-5" alt="steel" width="20" height="20"
+				<img class="float-left" alt="steel" width="20" height="20"
 					src="https://img.icons8.com/plasticine/2x/fa314a/metal.png" /> <span
 					th:text="${building.getBaseSteelCost} * ${building.level+1}" />
 			</div>
@@ -35,12 +34,12 @@
 		<div class="updateBuilding">
 
 			<a th:href="@{/levelUp/} + ${building.name}">
-				<button th:if="${building.level} != 0"
+				<button  class="btn btn-default btn-block" th:if="${building.level} != 0"
 					th:name="'create' + ${building.name}">Level up building</button>
-				<button th:if="${building.level} == 0"
+				<button  class="btn btn-default btn-block" th:if="${building.level} == 0"
 					th:name="'create' + ${building.name}">Build</button>
 			</a>
 		</div>
 	</div>
-</section>
+</div>
 </html>

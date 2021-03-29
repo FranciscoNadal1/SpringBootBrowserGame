@@ -86,4 +86,7 @@ public class Forge extends Building {
 		return this.portrait;
 	}
 
+	public String getDescription() {
+		return description;
+	}
 }

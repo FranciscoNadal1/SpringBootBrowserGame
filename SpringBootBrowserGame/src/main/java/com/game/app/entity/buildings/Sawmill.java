@@ -87,4 +87,9 @@ public class Sawmill extends Building {
 		return this.portrait;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+
 }

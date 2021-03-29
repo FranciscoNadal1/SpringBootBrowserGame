@@ -2,28 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout/layout :: head">
+
 <body>
+<header th:replace="commons/resourceBar.html"></header>
+	<div id="wrapper" class="">
+		<div th:replace="commons/sideMenu.html"></div>
 
-
-	<header th:replace="commons/resourceBar.html"></header>
- <div class="d-flex" id="wrapper">
-	<div th:replace="commons/sideMenu.html"></div>
-	<div>
-		<h2>Buildings</h2>
-	</div>
-	<div id="buildings">
-	<!-- 
-	<section layout:include="commons/showBuilding :: menu" th:with="building=${buildings.get('Farm')}"></section>
-	 -->
-	<div id="ProductionBuildings"  class="row">
-	    <section th:replace="commons/showBuilding :: menu(building=${buildings.get('Sawmill')})"> </section>
-	    <section th:replace="commons/showBuilding :: menu(building=${buildings.get('Quarry')})"> </section>
-	    <section th:replace="commons/showBuilding :: menu(building=${buildings.get('Farm')})"> </section>
-	    <section th:replace="commons/showBuilding :: menu(building=${buildings.get('Forge')})"> </section>
-	</div> 
+		<div class="container col-10 float-right">
+		<div id="RealmTitle" th:text="${kingdom.kingdomName}"/>
+		<div id="buildings">
+		<div id="ProductionBuildingsHeader" class="header">
+			<h2>Buildings</h2>
+		</div>		
+			<div id="ProductionBuildings" class="row">
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Sawmill')})">
+				</div>
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Quarry')})">
+				</div>
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Farm')})">
+				</div>
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Forge')})">
+				</div>
+			</div>
 
 		</div>
-
 </div>
 	</div>
 </body>

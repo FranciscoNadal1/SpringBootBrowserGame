@@ -90,5 +90,10 @@ public class Farm extends Building {
 	public String getPortrait() {
 		return this.portrait;
 	}
+	
+
+	public String getDescription() {
+		return description;
+	}
 
 }

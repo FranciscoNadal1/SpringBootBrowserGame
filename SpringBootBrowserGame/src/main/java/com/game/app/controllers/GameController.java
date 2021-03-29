@@ -51,7 +51,6 @@ public class GameController {
 		User user = new User("admin");		
 		userDao.save(user);
 */		
-		
 		model.addAttribute("game", currentUser.getGameProfile());
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("kingdom", currentKingdom);
