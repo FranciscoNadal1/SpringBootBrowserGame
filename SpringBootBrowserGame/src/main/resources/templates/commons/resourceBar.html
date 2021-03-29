@@ -1,24 +1,24 @@
 <div id="Resources" th:fragment="resources">
 	<div class="woodResource">
-		<span th:text="'Wood : ' + ${game.wood}"></span>
-		<span th:text="'(' + ${game.woodGrowthRate} + ')'"></span>
-		<span th:text="' / ' + ${game.maxWoodStored}"></span>
+		<span th:text="'Wood : ' + ${kingdom.wood}"></span>
+		<span th:text="'(' + ${kingdom.woodGrowthRate} +'+'+ (${kingdom.totalWoodGrowthRate} - ${kingdom.woodGrowthRate}) + ')'"></span>
+		<span th:text="' / ' + ${kingdom.maxWoodStored}"></span>
 	</div>
 	<div class="steelResource">
-		<span th:text="'Steel : ' + ${game.steel}"></span>
-		<span th:text="'(' + ${game.steelGrowthRate} + ')'"></span>
-		<span th:text="' / ' + ${game.maxSteelStored}"></span>
+		<span th:text="'Steel : ' + ${kingdom.steel}"></span>
+		<span th:text="'(' + ${kingdom.steelGrowthRate}  +'+'+ (${kingdom.totalSteelGrowthRate} - ${kingdom.steelGrowthRate}) +  ')'"></span>
+		<span th:text="' / ' + ${kingdom.maxSteelStored}"></span>
 	
 	</div>
 	<div class="rockResource">
-		<span th:text="'Rock : ' + ${game.rock}"></span>
-		<span th:text="'(' + ${game.rockGrowthRate} + ')'"></span>
-		<span th:text="' / ' + ${game.maxRockStored}"></span>
+		<span th:text="'Rock : ' + ${kingdom.rock}"></span>
+		<span th:text="'(' + ${kingdom.rockGrowthRate}  +'+'+ (${kingdom.totalRockGrowthRate} - ${kingdom.rockGrowthRate}) +  ')'"></span>
+		<span th:text="' / ' + ${kingdom.maxRockStored}"></span>
 	
 	</div>
 	<div class="foodResource">	
-		<span th:text="'Food : ' + ${game.food}"></span>
-		<span th:text="'(' + ${game.foodGrowthRate} + ')'"></span>
-		<span th:text="' / ' + ${game.maxFoodStored}"></span>
+		<span th:text="'Food : ' + ${kingdom.food}"></span>
+		<span th:text="'(' + ${kingdom.foodGrowthRate}  +'+'+ (${kingdom.totalFoodGrowthRate} - ${kingdom.foodGrowthRate}) +  ')'"></span>
+		<span th:text="' / ' + ${kingdom.maxFoodStored}"></span>
 	</div>
 </div>

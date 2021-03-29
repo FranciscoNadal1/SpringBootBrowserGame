@@ -84,10 +84,10 @@ public class GameProfile implements Serializable {
 		this.foodGrowthRate = 10;
 */
 // HACKS
-		this.woodGrowthRate = 50000;
-		this.rockGrowthRate = 20000;
-		this.steelGrowthRate = 5000;
-		this.foodGrowthRate = 1000;
+		this.woodGrowthRate = 50;
+		this.rockGrowthRate = 20;
+		this.steelGrowthRate = 5;
+		this.foodGrowthRate = 10;
 ////////
 		
 		this.maxWoodStored = 10000;

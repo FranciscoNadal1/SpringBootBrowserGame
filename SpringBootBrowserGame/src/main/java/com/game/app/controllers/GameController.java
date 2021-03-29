@@ -68,7 +68,6 @@ public class GameController {
 		
 		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
 		
-		System.out.println("Current realm : "+currentKingdom.getKingdomName());
 
 		model.addAttribute("game", currentUser.getGameProfile());
 		

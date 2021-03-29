@@ -22,8 +22,12 @@ public abstract class Building{
 	public int level;
 	public int hp;
 	public String name;
+	public String portrait;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	//TODO This should be a resource OBJECT, eventually
+	int production;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
 	private Kingdom kingdom;
 	////////////////////////////////////////////////////////////
@@ -34,7 +38,7 @@ public abstract class Building{
 
 	public Building(String name) {
 		this.name = name;
-		this.level = 1;
+		this.level = 0;
 		this.hp = 500;
 	}
 	////////////////////////////////////////////////////////////
@@ -45,6 +49,10 @@ public abstract class Building{
 	
 	public int getLevel() {
 		return level;
+	}
+
+	public int getProduction() {
+		return production;
 	}
 
 	public int getId() {
@@ -78,6 +86,8 @@ public abstract class Building{
 	public void setKingdom(Kingdom kingdom) {
 		this.kingdom = kingdom;
 	}
+
+	public abstract String getPortrait();
 	
 	
 	

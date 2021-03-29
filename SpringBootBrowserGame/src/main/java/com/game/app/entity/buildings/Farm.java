@@ -1,18 +1,21 @@
 package com.game.app.entity.buildings;
 
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 
 import com.game.app.entity.Building;
 import com.game.app.entity.GameProfile;
+import com.game.app.entity.Kingdom;
 
 @Entity
 public class Farm extends Building {
 
 	public Farm() {
 		this.hp = 500;
-		this.level = 1;
+		this.level = 0;
 		this.name = "Farm";
+		this.baseWoodCost = 300;
+		this.portrait = "https://image.shutterstock.com/image-photo/essex-uk-31-august-2018-260nw-1175345272.jpg";
+		production = 0;
 	}
 
 	String description = "Make food";
@@ -21,25 +24,31 @@ public class Farm extends Building {
 	int baseWoodCost = 300;
 	int baseRockCost = 50;
 	int baseSteelCost = 20;
+	public String portrait;
+	
+	//TODO This should be a resource OBJECT, eventually
+	int production;
 
 	public void levelUp() {
-		GameProfile gameProfile = super.getKingdom().getGameProfile();
+		Kingdom currentKingdom = super.getKingdom();
 		if (canLevelUp()) {
-			gameProfile.setWood(gameProfile.getWood() - (baseWoodCost * level));
-			gameProfile.setRock(gameProfile.getRock() - (baseRockCost * level));
-			gameProfile.setSteel(gameProfile.getSteel() - (baseSteelCost * level));
+			currentKingdom.setWood(currentKingdom.getWood() - (baseWoodCost * (level+1)));
+			currentKingdom.setRock(currentKingdom.getRock() - (baseRockCost * (level+1)));
+			currentKingdom.setSteel(currentKingdom.getSteel() - (baseSteelCost * (level+1)));
 
 			level++;
+			this.production += 10;
 		}
 
 	}
+	
 
 	public boolean canLevelUp() {
-		GameProfile gameProfile = super.getKingdom().getGameProfile();
+		Kingdom currentKingdom = super.getKingdom();
 
-		if (level < maxLevel) {
-			if ((baseWoodCost * level) < gameProfile.getWood() && (baseRockCost * level) < gameProfile.getRock()
-					&& (baseSteelCost * level) < gameProfile.getSteel()
+		if ((level+1) < maxLevel) {
+			if ((baseWoodCost * (level+1)) < currentKingdom.getWood() && (baseRockCost * (level+1)) < currentKingdom.getRock()
+					&& (baseSteelCost * (level+1)) < currentKingdom.getSteel()
 
 			)
 				return true;
@@ -49,6 +58,10 @@ public class Farm extends Building {
 	}
 ////////////////////////////////////////////////////////////////////////////////////
 
+	public int getProduction() {
+		return production;
+	}
+	
 	public int getBaseWoodCost() {
 		return baseWoodCost;
 	}
@@ -71,6 +84,11 @@ public class Farm extends Building {
 
 	public void setBaseSteelCost(int baseSteelCost) {
 		this.baseSteelCost = baseSteelCost;
+	}
+
+	@Override
+	public String getPortrait() {
+		return this.portrait;
 	}
 
 }

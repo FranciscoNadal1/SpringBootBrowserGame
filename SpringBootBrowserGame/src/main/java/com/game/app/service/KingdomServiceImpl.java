@@ -1,5 +1,7 @@
 package com.game.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,11 @@ public class KingdomServiceImpl implements IKingdomService {
 
 	public void saveKingdom(Kingdom kingdom) {		
 		kingdomDao.save(kingdom);				
+	}
+
+
+	@Override
+	public List<Kingdom> getAllKingdoms() {
+		return (List<Kingdom>) kingdomDao.findAll();
 	}	
 }
