@@ -1,24 +1,34 @@
-<div id="Resources" th:fragment="resources">
+<div id="Resources" th:fragment="resources"
+	class="navbar  navbar-light bg-light">
 	<div class="woodResource">
-		<span th:text="'Wood : ' + ${kingdom.wood}"></span>
-		<span th:text="'(' + ${kingdom.woodGrowthRate} +'+'+ (${kingdom.totalWoodGrowthRate} - ${kingdom.woodGrowthRate}) + ')'"></span>
+		<img alt="wood" width="40" height="40"
+			src="https://cdn3.iconfinder.com/data/icons/random-4/96/wood-trunk-log-camping-nature-resource-512.png" />
+		<span th:text="' : ' + ${kingdom.wood}"></span> <span
+			th:text="'(' + ${kingdom.woodGrowthRate} +'+'+ (${kingdom.totalWoodGrowthRate} - ${kingdom.woodGrowthRate}) + ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxWoodStored}"></span>
 	</div>
-	<div class="steelResource">
-		<span th:text="'Steel : ' + ${kingdom.steel}"></span>
-		<span th:text="'(' + ${kingdom.steelGrowthRate}  +'+'+ (${kingdom.totalSteelGrowthRate} - ${kingdom.steelGrowthRate}) +  ')'"></span>
-		<span th:text="' / ' + ${kingdom.maxSteelStored}"></span>
-	
-	</div>
 	<div class="rockResource">
-		<span th:text="'Rock : ' + ${kingdom.rock}"></span>
-		<span th:text="'(' + ${kingdom.rockGrowthRate}  +'+'+ (${kingdom.totalRockGrowthRate} - ${kingdom.rockGrowthRate}) +  ')'"></span>
+		<img alt="rock" width="40" height="40"
+			src="https://img.icons8.com/emoji/452/rock-emoji.png" /> <span
+			th:text="' : ' + ${kingdom.rock}"></span> <span
+			th:text="'(' + ${kingdom.rockGrowthRate}  +'+'+ (${kingdom.totalRockGrowthRate} - ${kingdom.rockGrowthRate}) +  ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxRockStored}"></span>
-	
+
 	</div>
-	<div class="foodResource">	
-		<span th:text="'Food : ' + ${kingdom.food}"></span>
-		<span th:text="'(' + ${kingdom.foodGrowthRate}  +'+'+ (${kingdom.totalFoodGrowthRate} - ${kingdom.foodGrowthRate}) +  ')'"></span>
+	<div class="steelResource">
+		<img alt="steel" width="40" height="40"
+			src="https://img.icons8.com/plasticine/2x/fa314a/metal.png" /> <span
+			th:text="' : ' + ${kingdom.steel}"></span> <span
+			th:text="'(' + ${kingdom.steelGrowthRate}  +'+'+ (${kingdom.totalSteelGrowthRate} - ${kingdom.steelGrowthRate}) +  ')'"></span>
+		<span th:text="' / ' + ${kingdom.maxSteelStored}"></span>
+
+	</div>
+
+	<div class="foodResource">
+		<img alt="food" width="40" height="40"
+			src="https://i.pinimg.com/originals/01/be/7e/01be7eb316abb4dd89675274dbc0cd21.jpg" />
+		<span th:text="' : ' + ${kingdom.food}"></span> <span
+			th:text="'(' + ${kingdom.foodGrowthRate}  +'+'+ (${kingdom.totalFoodGrowthRate} - ${kingdom.foodGrowthRate}) +  ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxFoodStored}"></span>
 	</div>
 </div>

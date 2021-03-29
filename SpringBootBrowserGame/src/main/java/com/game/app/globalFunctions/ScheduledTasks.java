@@ -28,7 +28,7 @@ public class ScheduledTasks {
 	@Autowired
 	private IKingdomService kingdomService;
 	
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 10000)
 	public void updateResources() {
 	//	System.out.println("Updating");
 		
