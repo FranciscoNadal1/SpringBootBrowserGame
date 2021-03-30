@@ -4,14 +4,14 @@
 		<img alt="wood" width="40" height="40"
 			src="https://cdn3.iconfinder.com/data/icons/random-4/96/wood-trunk-log-camping-nature-resource-512.png" />
 		<span th:text="' : ' + ${kingdom.wood}"></span> <span
-			th:text="'(' + ${kingdom.woodGrowthRate} +'+'+ (${kingdom.totalWoodGrowthRate} - ${kingdom.woodGrowthRate}) + ')'"></span>
+			th:text="'(' + ${kingdom.baseWoodGrowthRate} +'+'+ (${kingdom.extraWoodGrowthRate}) + ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxWoodStored}"></span>
 	</div>
 	<div class="rockResource">
 		<img alt="rock" width="40" height="40"
 			src="https://img.icons8.com/emoji/452/rock-emoji.png" /> <span
 			th:text="' : ' + ${kingdom.rock}"></span> <span
-			th:text="'(' + ${kingdom.rockGrowthRate}  +'+'+ (${kingdom.totalRockGrowthRate} - ${kingdom.rockGrowthRate}) +  ')'"></span>
+			th:text="'(' + ${kingdom.baseRockGrowthRate}  +'+'+ (${kingdom.extraRockGrowthRate}) +  ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxRockStored}"></span>
 
 	</div>
@@ -19,7 +19,7 @@
 		<img alt="steel" width="40" height="40"
 			src="https://img.icons8.com/plasticine/2x/fa314a/metal.png" /> <span
 			th:text="' : ' + ${kingdom.steel}"></span> <span
-			th:text="'(' + ${kingdom.steelGrowthRate}  +'+'+ (${kingdom.totalSteelGrowthRate} - ${kingdom.steelGrowthRate}) +  ')'"></span>
+			th:text="'(' + ${kingdom.baseSteelGrowthRate}  +'+'+ (${kingdom.extraSteelGrowthRate}) +  ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxSteelStored}"></span>
 
 	</div>
@@ -28,7 +28,7 @@
 		<img alt="food" width="40" height="40"
 			src="https://i.pinimg.com/originals/01/be/7e/01be7eb316abb4dd89675274dbc0cd21.jpg" />
 		<span th:text="' : ' + ${kingdom.food}"></span> <span
-			th:text="'(' + ${kingdom.foodGrowthRate}  +'+'+ (${kingdom.totalFoodGrowthRate} - ${kingdom.foodGrowthRate}) +  ')'"></span>
+			th:text="'(' + ${kingdom.baseFoodGrowthRate}  +'+'+ (${kingdom.extraFoodGrowthRate}) +  ')'"></span>
 		<span th:text="' / ' + ${kingdom.maxFoodStored}"></span>
 	</div>
 </div>

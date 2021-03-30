@@ -31,7 +31,6 @@ public class Kingdom {
 
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
-//	@MapKeyJoinColumn(name="name")
 	@MapKey(name = "name")
 	private Map<String, Building> buildings;
 	
@@ -48,10 +47,10 @@ public class Kingdom {
 	private int baseFoodGrowthRate;
 	
 
-	private int totalWoodGrowthRate;
-	private int totalRockGrowthRate;
-	private int totalSteelGrowthRate;
-	private int totalFoodGrowthRate;
+	private int extraWoodGrowthRate;
+	private int extraRockGrowthRate;
+	private int extraSteelGrowthRate;
+	private int extraFoodGrowthRate;
 
 	/////////////////
 
@@ -60,18 +59,7 @@ public class Kingdom {
 	private int maxSteelStored;
 	private int maxFoodStored;
 
-	////////////////
-/*	
-	@OneToMany
-	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")	
-//	private Map<String,Building> buildings;
-	private List<Building> buildings;
-*/	
-	/*
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "building_id", referencedColumnName = "id")
-	private List<Building> buildings;
-	*/
+
 	Kingdom(){
 		this.kingdomName = "Kingdom";
 		this.isMainHomeland = true;
@@ -118,11 +106,6 @@ public class Kingdom {
 		this.maxSteelStored = 2000;
 		this.maxFoodStored = 500;
 
-//		Building newBuilding = new Farm();
-//		 new Farm().setKingdom(this);
-		
-//		this.buildings.put("Farm", new Farm());
-
 	}
 	////////////////////////////////
 
@@ -137,16 +120,7 @@ public class Kingdom {
 	public void setBuilding(Map<String,Building> building) {
 		this.buildings = building;
 	}
-	
-/*
-	public Map<String, Building> getBuildings() {
-		return buildings;
-	}
 
-	public void setBuilding(Map<String, Building> building) {
-		this.buildings = building;
-	}
-*/
 	public void setKingdomName(String kingdomName) {
 		this.kingdomName = kingdomName;
 	}
@@ -272,61 +246,91 @@ public class Kingdom {
 
 	
 	
-	////////////////////////////////////////////////////////////////
 
-	public int getTotalWoodGrowthRate() {
-		return totalWoodGrowthRate;
-	}
-
+	
 	public void setTotalWoodGrowthRate(int totalWoodGrowthRate) {
-		this.totalWoodGrowthRate = totalWoodGrowthRate;
-	}
-
-	public int getTotalRockGrowthRate() {
-		return totalRockGrowthRate;
+		this.extraWoodGrowthRate = totalWoodGrowthRate;
 	}
 
 	public void setTotalRockGrowthRate(int totalRockGrowthRate) {
-		this.totalRockGrowthRate = totalRockGrowthRate;
+		this.extraRockGrowthRate = totalRockGrowthRate;
 	}
 
 	public int getTotalSteelGrowthRate() {
-		return totalSteelGrowthRate;
+		return extraSteelGrowthRate;
 	}
 
 	public void setTotalSteelGrowthRate(int totalSteelGrowthRate) {
-		this.totalSteelGrowthRate = totalSteelGrowthRate;
+		this.extraSteelGrowthRate = totalSteelGrowthRate;
 	}
 
-	public int getTotalFoodGrowthRate() {
-		return totalFoodGrowthRate;
-	}
 
 	public void setTotalFoodGrowthRate(int totalFoodGrowthRate) {
-		this.totalFoodGrowthRate = totalFoodGrowthRate;
+		this.extraFoodGrowthRate = totalFoodGrowthRate;
+	}
+	
+	
+
+	public int getBaseWoodGrowthRate() {
+			return baseWoodGrowthRate;
+		}
+
+	public void setBaseWoodGrowthRate(int baseWoodGrowthRate) {
+		this.baseWoodGrowthRate = baseWoodGrowthRate;
 	}
 
-	public void resourcesGrow() {	
-		
-		//Farm farm = (Farm) this.buildings.get("Farm");
-		
-		/*
-		Building sawmill = buildings.get("Sawmill");
-		Building quarry = buildings.get("Quarry");
-		Building forge = buildings.get("Forge");
-		
-		*/
-		this.totalFoodGrowthRate 	=	this.getWoodGrowthRate() + this.buildings.get("Farm").getProduction();
-		System.out.println(this.buildings.get("Farm").getProduction());
-		System.out.println(totalFoodGrowthRate);
-		this.totalRockGrowthRate 	=	this.getWoodGrowthRate() + this.buildings.get("Quarry").getProduction();
-		this.totalSteelGrowthRate 	=	this.getWoodGrowthRate() + this.buildings.get("Forge").getProduction();
-		this.totalWoodGrowthRate 	=	this.getWoodGrowthRate() + this.buildings.get("Sawmill").getProduction();
+	public int getBaseRockGrowthRate() {
+		return baseRockGrowthRate;
+	}
 
-		this.wood 		= 	fillResourceUntilMax(	this.getWood(), 		this.totalWoodGrowthRate, 	this.getMaxWoodStored());
-		this.steel 		= 	fillResourceUntilMax(	this.getSteel(), 		this.totalSteelGrowthRate, 	this.getMaxSteelStored());
-		this.rock 		= 	fillResourceUntilMax(	this.getRock(), 		this.totalRockGrowthRate, 	this.getMaxRockStored());
-		this.food 		= 	fillResourceUntilMax(	this.getFood(), 		this.totalFoodGrowthRate, 	this.getMaxFoodStored());
+	public void setBaseRockGrowthRate(int baseRockGrowthRate) {
+		this.baseRockGrowthRate = baseRockGrowthRate;
+	}
+
+	public int getBaseSteelGrowthRate() {
+		return baseSteelGrowthRate;
+	}
+
+	public void setBaseSteelGrowthRate(int baseSteelGrowthRate) {
+		this.baseSteelGrowthRate = baseSteelGrowthRate;
+	}
+
+	public int getBaseFoodGrowthRate() {
+		return baseFoodGrowthRate;
+	}
+
+	public void setBaseFoodGrowthRate(int baseFoodGrowthRate) {
+		this.baseFoodGrowthRate = baseFoodGrowthRate;
+	}
+
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int getExtraWoodGrowthRate() {
+		return this.buildings.get("Sawmill").getProduction();
+	}
+	
+	public int getExtraRockGrowthRate() {
+		return this.buildings.get("Quarry").getProduction();
+	}
+
+	public int getExtraFoodGrowthRate() {
+		return this.buildings.get("Farm").getProduction();
+	}
+	
+	public int getExtraSteelGrowthRate() {
+		return this.buildings.get("Forge").getProduction();
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void resourcesGrow() {			
+
+		this.wood 		= 	fillResourceUntilMax(	this.getWood(), 		this.getExtraWoodGrowthRate() + this.baseWoodGrowthRate, 		this.getMaxWoodStored());
+		this.steel 		= 	fillResourceUntilMax(	this.getSteel(), 		this.getExtraSteelGrowthRate() + this.baseSteelGrowthRate, 	this.getMaxSteelStored());
+		this.rock 		= 	fillResourceUntilMax(	this.getRock(), 		this.getExtraRockGrowthRate() + this.baseRockGrowthRate, 		this.getMaxRockStored());
+		this.food 		= 	fillResourceUntilMax(	this.getFood(), 		this.getExtraFoodGrowthRate() + this.baseFoodGrowthRate, 		this.getMaxFoodStored());
+		System.out.println("Growth");
 		
 	}
 	

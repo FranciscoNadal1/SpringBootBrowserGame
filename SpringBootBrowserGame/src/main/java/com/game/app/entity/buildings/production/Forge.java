@@ -1,4 +1,4 @@
-package com.game.app.entity.buildings;
+package com.game.app.entity.buildings.production;
 
 import javax.persistence.Entity;
 
@@ -26,23 +26,12 @@ public class Forge extends Building {
 	String description = "Make steel";
 
 ////////////////////////////////////////////////////////////////////////////////////
-	/*
-	public void levelUp() {
-		super.levelUp();
-	}
-	
-	public boolean canLevelUp(StaticRequirements requirements) {
-		return super.canLevelUp(requirements);
-	}
-	public boolean canLevelUp() {		
 
-		return super.canLevelUp();
-	}
-	*/
 ////////////////////////////////////////////////////////////////////////////////////
 
 	public int getProduction() {
-		return production;
+		//return production;
+		return this.level * 10;
 	}
 
 	@Override

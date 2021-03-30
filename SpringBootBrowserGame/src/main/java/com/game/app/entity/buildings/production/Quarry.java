@@ -1,4 +1,4 @@
-package com.game.app.entity.buildings;
+package com.game.app.entity.buildings.production;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,19 +35,12 @@ public class Quarry extends Building {
 		super.levelUp();
 	}
 	
-	/*
-	public boolean canLevelUp(StaticRequirements requirements) {
-		return super.canLevelUp(requirements);
-	}
-	public boolean canLevelUp() {		
 
-		return super.canLevelUp();
-	}
-	*/
 ////////////////////////////////////////////////////////////////////////////////////
 
 	public int getProduction() {
-		return production;
+		//return production;
+		return this.level * 10;
 	}
 
 	@Override

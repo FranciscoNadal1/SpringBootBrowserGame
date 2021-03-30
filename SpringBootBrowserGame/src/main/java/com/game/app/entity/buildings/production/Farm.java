@@ -1,4 +1,4 @@
-package com.game.app.entity.buildings;
+package com.game.app.entity.buildings.production;
 
 import java.util.List;
 
@@ -33,25 +33,12 @@ public class Farm extends Building {
 	
 	//TODO This should be a resource OBJECT, eventually
 	int production;
-/*
-	public void levelUp() {
-		super.levelUp();
-	}
-	
-	public boolean canLevelUp(StaticRequirements requirements) {
-		return super.canLevelUp(requirements);
 
-	}
-	public boolean canLevelUp() {		
-
-		return super.canLevelUp();
-
-	}
-	*/
 ////////////////////////////////////////////////////////////////////////////////////
 
 	public int getProduction() {
-		return production;
+	//	return production;
+		return this.level * 10;
 	}
 	
 	@Override
