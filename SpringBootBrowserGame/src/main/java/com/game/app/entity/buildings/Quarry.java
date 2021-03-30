@@ -18,13 +18,10 @@ public class Quarry extends Building {
 		this.level = 0;
 		this.name = "Quarry";
 		this.portrait = "https://www.masonrymagazine.com/wp-content/uploads/2018/08/ollo.jpg";
-	
-		
-	
-	
+		super.setMaxLevel(30);	
 	}
 
-	int maxLevel = 30;
+	//int maxLevel;
 
 	String description = "Chop da stones";
 
@@ -35,16 +32,18 @@ public class Quarry extends Building {
 	@Column(length = 30000)
 	public String portrait;
 	public void levelUp() {
-		super.levelUp(maxLevel);
+		super.levelUp();
 	}
 	
+	/*
 	public boolean canLevelUp(StaticRequirements requirements) {
-		return super.canLevelUp(requirements, maxLevel);
+		return super.canLevelUp(requirements);
 	}
 	public boolean canLevelUp() {		
 
-		return super.canLevelUp(maxLevel);
+		return super.canLevelUp();
 	}
+	*/
 ////////////////////////////////////////////////////////////////////////////////////
 
 	public int getProduction() {

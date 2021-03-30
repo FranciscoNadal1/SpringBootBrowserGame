@@ -39,6 +39,8 @@ public abstract class Building{
 	public String name;
 	public String portrait;
 	
+	int maxLevel;
+	
 	//TODO This should be a resource OBJECT, eventually
 	int production;
 	
@@ -58,20 +60,20 @@ public abstract class Building{
 	}
 	////////////////////////////////////////////////////////////
 	
-	public abstract boolean canLevelUp();
-	public abstract void levelUp();
+//	public abstract boolean canLevelUp();
+//	public abstract void levelUp();
 	
 	
 	
 	
-	public void levelUp(int maxLevel) {
+	public void levelUp() {
 		
 		StaticRequirements req = StaticRequirementsSingleton.getInstance().getStaticRequirementsFromNameAndLevel(name, level+1);
 		//StaticRequirementsSingleton.getInstance().printAllStaticRequirements();		
 		
 		
 		Kingdom currentKingdom = getKingdom();
-		if (canLevelUp(req, maxLevel)) {
+		if (canLevelUp(req)) {
 			currentKingdom.setWood(currentKingdom.getWood() - req.getWood());
 			currentKingdom.setRock(currentKingdom.getRock() - req.getRock());
 			currentKingdom.setSteel(currentKingdom.getSteel() - req.getSteel());
@@ -82,7 +84,7 @@ public abstract class Building{
 
 	}
 	
-	public boolean canLevelUp(StaticRequirements requirements, int maxLevel) {
+	public boolean canLevelUp(StaticRequirements requirements) {
 
 		Kingdom currentKingdom = getKingdom();
 		if ((level+1) < maxLevel) {
@@ -96,10 +98,10 @@ public abstract class Building{
 		return false;
 		
 	}
-	public boolean canLevelUp(int maxLevel) {		
+	public boolean canLevelUp() {		
 
 		StaticRequirements req = StaticRequirementsSingleton.getInstance().getStaticRequirementsFromNameAndLevel(name, level+1);		
-		return(canLevelUp(req, maxLevel));
+		return(canLevelUp(req));
 		
 	}
 	
@@ -149,6 +151,14 @@ public abstract class Building{
 	}
 
 	public abstract String getPortrait();
+
+	public int getMaxLevel() {
+		return maxLevel;
+	}
+
+	public void setMaxLevel(int maxLevel) {
+		this.maxLevel = maxLevel;
+	}
 	
 	
 	

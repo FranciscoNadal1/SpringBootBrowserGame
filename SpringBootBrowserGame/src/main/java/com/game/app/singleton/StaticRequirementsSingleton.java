@@ -29,7 +29,7 @@ public class StaticRequirementsSingleton {
     
 	public  void populate() {
 
-		requirementList.add(new StaticRequirements("Farm", 0, 50, 10, 0, 0));
+		//	Wood, Rock, Steel, Food
 		requirementList.add(new StaticRequirements("Farm", 1, 100, 200, 10, 0));		
 		requirementList.add(new StaticRequirements("Farm", 2, 200, 400, 10, 0));
 		requirementList.add(new StaticRequirements("Farm", 3, 300, 500, 10, 0));
@@ -41,7 +41,6 @@ public class StaticRequirementsSingleton {
 		requirementList.add(new StaticRequirements("Farm", 9, 900, 1100, 40, 0));
 		requirementList.add(new StaticRequirements("Farm", 10, 1000, 1200, 50, 0));
 
-		requirementList.add(new StaticRequirements("Quarry", 0, 100, 200, 10, 0));
 		requirementList.add(new StaticRequirements("Quarry", 1, 100, 200, 10, 0));
 		requirementList.add(new StaticRequirements("Quarry", 2, 200, 400, 10, 0));
 		requirementList.add(new StaticRequirements("Quarry", 3, 300, 500, 10, 0));
@@ -53,7 +52,6 @@ public class StaticRequirementsSingleton {
 		requirementList.add(new StaticRequirements("Quarry", 9, 900, 1100, 40, 0));
 		requirementList.add(new StaticRequirements("Quarry", 10, 1000, 1200, 50, 0));
 
-		requirementList.add(new StaticRequirements("Sawmill", 0, 100, 200, 10, 0));
 		requirementList.add(new StaticRequirements("Sawmill", 1, 100, 200, 10, 0));
 		requirementList.add(new StaticRequirements("Sawmill", 2, 200, 400, 10, 0));
 		requirementList.add(new StaticRequirements("Sawmill", 3, 300, 500, 10, 0));
@@ -65,7 +63,6 @@ public class StaticRequirementsSingleton {
 		requirementList.add(new StaticRequirements("Sawmill", 9, 900, 1100, 40, 0));
 		requirementList.add(new StaticRequirements("Sawmill", 10, 1000, 1200, 50, 0));
 
-		requirementList.add(new StaticRequirements("Forge", 0, 100, 200, 10, 0));
 		requirementList.add(new StaticRequirements("Forge", 1, 100, 200, 10, 0));
 		requirementList.add(new StaticRequirements("Forge", 2, 200, 400, 10, 0));
 		requirementList.add(new StaticRequirements("Forge", 3, 300, 500, 10, 0));

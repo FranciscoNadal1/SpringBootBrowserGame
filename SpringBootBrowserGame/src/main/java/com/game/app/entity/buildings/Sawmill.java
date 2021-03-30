@@ -16,26 +16,27 @@ public class Sawmill extends Building {
 		this.level = 0;
 		this.name = "Sawmill";
 		this.portrait = "https://cdna.artstation.com/p/assets/images/images/009/783/810/large/fran-fdez-conceptos-ciencia-produccion.jpg?1520883100";
+		super.setMaxLevel(30);
 	}
-
-	int maxLevel = 30;
 
 	String description = "Chop da trees";
 
 	public String portrait;
 	//TODO This should be a resource OBJECT, eventually
 	int production;
+	
+	/*
 	public void levelUp() {
-		super.levelUp(maxLevel);
+		super.levelUp();
 	}
 	
 	public boolean canLevelUp(StaticRequirements requirements) {
-		return super.canLevelUp(requirements, maxLevel);
+		return super.canLevelUp(requirements);
 	}
 	public boolean canLevelUp() {		
-
-		return super.canLevelUp(maxLevel);
+		return super.canLevelUp();
 	}
+	*/
 ////////////////////////////////////////////////////////////////////////////////////
 
 	public int getProduction() {

@@ -16,9 +16,8 @@ public class Forge extends Building {
 		this.level = 0;
 		this.name = "Forge";
 		this.portrait = "https://media.sketchfab.com/models/f798514d4054444384bc03521f4bd141/thumbnails/0223215623134229a18dfb8efbe644ee/e2243d63b1ef4a9788429c3a3fc45d06.jpeg";
+		super.setMaxLevel(10);
 	}
-
-	int maxLevel = 10;
 	public String portrait;
 	
 	//TODO This should be a resource OBJECT, eventually
@@ -27,17 +26,19 @@ public class Forge extends Building {
 	String description = "Make steel";
 
 ////////////////////////////////////////////////////////////////////////////////////
+	/*
 	public void levelUp() {
-		super.levelUp(maxLevel);
+		super.levelUp();
 	}
 	
 	public boolean canLevelUp(StaticRequirements requirements) {
-		return super.canLevelUp(requirements, maxLevel);
+		return super.canLevelUp(requirements);
 	}
 	public boolean canLevelUp() {		
 
-		return super.canLevelUp(maxLevel);
+		return super.canLevelUp();
 	}
+	*/
 ////////////////////////////////////////////////////////////////////////////////////
 
 	public int getProduction() {
