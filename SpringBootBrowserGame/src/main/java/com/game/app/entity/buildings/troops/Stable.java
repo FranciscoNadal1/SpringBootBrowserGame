@@ -5,18 +5,18 @@ import javax.persistence.Entity;
 import com.game.app.entity.Building;
 
 @Entity
-public class Barracks extends Building {
+public class Stable extends Building {
 
 
-	public Barracks() {
+	public Stable() {
 		this.hp = 3000;
 		this.level = 0;
-		this.name = "Barracks";
-		this.portrait = "https://i.imgur.com/W6rFzZr.jpg";
-		super.setMaxLevel(5);
+		this.name = "Stable";
+		this.portrait = "https://slm-assets.secondlife.com/assets/11287979/view_large/Medieval_horse_stable_1.jpg?1426874474";
+		super.setMaxLevel(3);
 	}
 
-	String description = "Allows for troop training. Unlock basic troop production";
+	String description = "Unlock horses, unlock mounted troops";
 
 	public String portrait;
 	//TODO This should be a resource OBJECT, eventually

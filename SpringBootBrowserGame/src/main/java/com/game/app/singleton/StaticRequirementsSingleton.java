@@ -133,6 +133,15 @@ public class StaticRequirementsSingleton {
 		requirementList.add(new StaticRequirements("Barracks", 4, 4000, 600, 10, 0));
 		requirementList.add(new StaticRequirements("Barracks", 5, 5000, 700, 10, 0));
 		
+		requirementList.add(new StaticRequirements("Mage tower", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Mage tower", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Mage tower", 3, 3000, 500, 10, 0));
+		requirementList.add(new StaticRequirements("Mage tower", 4, 4000, 600, 10, 0));
+		requirementList.add(new StaticRequirements("Mage tower", 5, 5000, 700, 10, 0));
+
+		requirementList.add(new StaticRequirements("Stable", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Stable", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Stable", 3, 3000, 500, 10, 0));
 		// requirementList.addAll(foo);
 	}
 	public   StaticRequirements getStaticRequirementsFromNameAndLevel(String name, int level) {
