@@ -47,7 +47,7 @@ public class GameController {
 	@Autowired
 	private IRequirementsService requirementsServiceDao;
 	
-	@GetMapping(value = "/test")
+	@GetMapping(value = "/buildings")
 	public String test(Model model) {
 		User currentUser = userDao.findById(1);
 		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
@@ -71,7 +71,7 @@ public class GameController {
 	//	Requirements requs = GlobalFunctions.getRequirement(requ.getName(), requ.getLevel());
 	//		System.out.println("AAAAA-" + requs.getName());
 			
-		return "test";
+		return "buildings";
 	}
 
 	@GetMapping(value = "/build/{building}")
@@ -113,7 +113,7 @@ public class GameController {
 		newBuilding.setKingdom(currentKingdom);
 		buildingServiceDao.save(newBuilding);
 
-		return "redirect:/test";
+		return "redirect:/buildings";
 	}
 	@GetMapping(value = "/levelUp/{building}")
 	public String levelUpBuilding(Model model, @PathVariable(value = "building") String building) {
@@ -131,7 +131,7 @@ public class GameController {
 		levelingUpBuilding.levelUp();
 		buildingServiceDao.save(levelingUpBuilding);
 
-		return "redirect:/test";
+		return "redirect:/buildings";
 	}	
 	
 }

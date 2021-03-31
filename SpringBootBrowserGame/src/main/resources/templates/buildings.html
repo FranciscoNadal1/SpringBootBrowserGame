@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<body>
+	<header th:replace="commons/resourceBar.html"></header>
+	<div id="wrapper" class="">
+		<div th:replace="commons/sideMenu.html"></div>
+
+		<div id="Content" class="container col-10 float-right">
+			<div id="RealmTitle" th:text="${kingdom.kingdomName}" />
+			<div id="buildings">
+				<div id="ProductionBuildingsHeader" class="header">
+					<h2>Production buildings</h2>
+				</div>
+				<div id="ProductionBuildings" class="row">
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Sawmill')})">
+					</div>
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Quarry')})">
+					</div>
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Farm')})">
+					</div>
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Forge')})">
+					</div>
+				</div>
+
+			</div>
+
+			<div id="buildings">
+				<div id="ProductionBuildingsHeader" class="header">
+					<h2>Storage buildings</h2>
+				</div>
+				<div id="StorageBuildings" class="row">
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Wood WhareHouse')})">
+					</div>
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Rock WhareHouse')})">
+					</div>
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Food WhareHouse')})">
+					</div>
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Steel WhareHouse')})">
+					</div>
+				</div>
+
+			</div>
+			
+			<div id="buildings">
+				<div id="TroopsBuildingsHeader" class="header">
+					<h2>Troop buildings</h2>
+				</div>
+				<div id="TroopsBuildings" class="row">
+					<div
+						th:replace="commons/showBuilding :: menu(building=${buildings.get('Barracks')})">
+					</div>
+				</div>
+
+			</div>
+			
+			
+		</div>
+	</div>
+</body>
+</html>

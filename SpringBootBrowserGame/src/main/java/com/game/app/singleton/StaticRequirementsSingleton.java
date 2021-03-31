@@ -124,6 +124,15 @@ public class StaticRequirementsSingleton {
 		requirementList.add(new StaticRequirements("Wood WhareHouse", 9, 9000, 1100, 10, 0));
 		requirementList.add(new StaticRequirements("Wood WhareHouse", 10, 10000, 1200, 10, 0));
 
+///////////////////////////////////////////////////////////////////////////////////////
+////////////////Troops
+
+		requirementList.add(new StaticRequirements("Barracks", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Barracks", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Barracks", 3, 3000, 500, 10, 0));
+		requirementList.add(new StaticRequirements("Barracks", 4, 4000, 600, 10, 0));
+		requirementList.add(new StaticRequirements("Barracks", 5, 5000, 700, 10, 0));
+		
 		// requirementList.addAll(foo);
 	}
 	public   StaticRequirements getStaticRequirementsFromNameAndLevel(String name, int level) {

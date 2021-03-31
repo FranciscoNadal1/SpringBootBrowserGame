@@ -18,6 +18,7 @@ import com.game.app.entity.buildings.storage.FoodWharehouse;
 import com.game.app.entity.buildings.storage.RockWharehouse;
 import com.game.app.entity.buildings.storage.SteelWharehouse;
 import com.game.app.entity.buildings.storage.WoodWharehouse;
+import com.game.app.entity.buildings.troops.Barracks;
 import com.game.app.service.IBuildingService;
 import com.game.app.service.IRequirementsService;
 import com.game.app.singleton.StaticRequirementsSingleton;
@@ -60,6 +61,8 @@ public class GlobalFunctions {
 		Building newWoodStorage = new WoodWharehouse();
 		Building newRockStorage = new RockWharehouse();
 		Building newSteeltorage = new SteelWharehouse();
+		
+		Building barracks = new Barracks();
 
 
 		newFarm.setKingdom(newKingdom);
@@ -72,6 +75,8 @@ public class GlobalFunctions {
 		newRockStorage.setKingdom(newKingdom);
 		newSteeltorage.setKingdom(newKingdom);
 
+		barracks.setKingdom(newKingdom);
+
 
 		buildingService.save(newFarm);
 		buildingService.save(newQuarry);
@@ -83,6 +88,7 @@ public class GlobalFunctions {
 		buildingService.save(newRockStorage);
 		buildingService.save(newSteeltorage);
 
+		buildingService.save(barracks);
 		
 		requirementsService.baseRequirements();
 		StaticRequirementsSingleton.getInstance().populate();
