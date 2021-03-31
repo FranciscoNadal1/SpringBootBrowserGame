@@ -101,10 +101,6 @@ public class Kingdom {
 		this.baseFoodGrowthRate = 100;
 ////////
 		
-		this.maxWoodStored = 10000;
-		this.maxRockStored = 5000;
-		this.maxSteelStored = 2000;
-		this.maxFoodStored = 500;
 
 	}
 	////////////////////////////////
@@ -212,33 +208,20 @@ public class Kingdom {
 		this.baseFoodGrowthRate = foodGrowthRate;
 	}
 
-	public int getMaxWoodStored() {
-		return maxWoodStored;
-	}
-
 	public void setMaxWoodStored(int maxWoodStored) {
 		this.maxWoodStored = maxWoodStored;
 	}
 
-	public int getMaxRockStored() {
-		return maxRockStored;
-	}
 
 	public void setMaxRockStored(int maxRockStored) {
 		this.maxRockStored = maxRockStored;
 	}
 
-	public int getMaxSteelStored() {
-		return maxSteelStored;
-	}
 
 	public void setMaxSteelStored(int maxSteelStored) {
 		this.maxSteelStored = maxSteelStored;
 	}
 
-	public int getMaxFoodStored() {
-		return maxFoodStored;
-	}
 
 	public void setMaxFoodStored(int maxFoodStored) {
 		this.maxFoodStored = maxFoodStored;
@@ -323,11 +306,31 @@ public class Kingdom {
 		return this.buildings.get("Forge").getProduction();
 	}
 
+	public int getMaxWoodStored() {
+	//	return maxWoodStored;	
+		return 1000 + this.buildings.get("Wood WhareHouse").getStoreCapacity();
+	}
+
+	public int getMaxRockStored() {
+	//	return maxRockStored;
+		return 1000 + this.buildings.get("Rock WhareHouse").getStoreCapacity();
+		
+	}
+	public int getMaxSteelStored() {
+	//	return maxSteelStored;
+		return 1000 + this.buildings.get("Steel WhareHouse").getStoreCapacity();
+		
+	}
+	public int getMaxFoodStored() {
+	//	return maxFoodStored;
+		return 500 + this.buildings.get("Food WhareHouse").getStoreCapacity();
+		
+	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void resourcesGrow() {			
 
 		this.wood 		= 	fillResourceUntilMax(	this.getWood(), 		this.getExtraWoodGrowthRate() + this.baseWoodGrowthRate, 		this.getMaxWoodStored());
-		this.steel 		= 	fillResourceUntilMax(	this.getSteel(), 		this.getExtraSteelGrowthRate() + this.baseSteelGrowthRate, 	this.getMaxSteelStored());
+		this.steel 		= 	fillResourceUntilMax(	this.getSteel(), 		this.getExtraSteelGrowthRate() + this.baseSteelGrowthRate, 		this.getMaxSteelStored());
 		this.rock 		= 	fillResourceUntilMax(	this.getRock(), 		this.getExtraRockGrowthRate() + this.baseRockGrowthRate, 		this.getMaxRockStored());
 		this.food 		= 	fillResourceUntilMax(	this.getFood(), 		this.getExtraFoodGrowthRate() + this.baseFoodGrowthRate, 		this.getMaxFoodStored());
 		System.out.println("Growth");

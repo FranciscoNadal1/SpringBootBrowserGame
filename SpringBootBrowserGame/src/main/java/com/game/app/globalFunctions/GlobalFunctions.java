@@ -6,16 +6,18 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import com.game.app.dao.IKingdom;
-import com.game.app.dao.IRequirements;
 import com.game.app.dao.IUser;
 import com.game.app.entity.Building;
 import com.game.app.entity.Kingdom;
-import com.game.app.entity.Requirements;
 import com.game.app.entity.User;
 import com.game.app.entity.buildings.production.Farm;
 import com.game.app.entity.buildings.production.Forge;
 import com.game.app.entity.buildings.production.Quarry;
 import com.game.app.entity.buildings.production.Sawmill;
+import com.game.app.entity.buildings.storage.FoodWharehouse;
+import com.game.app.entity.buildings.storage.RockWharehouse;
+import com.game.app.entity.buildings.storage.SteelWharehouse;
+import com.game.app.entity.buildings.storage.WoodWharehouse;
 import com.game.app.service.IBuildingService;
 import com.game.app.service.IRequirementsService;
 import com.game.app.singleton.StaticRequirementsSingleton;
@@ -52,18 +54,35 @@ public class GlobalFunctions {
 		Building newFarm = new Farm();
 		Building newQuarry = new Quarry();
 		Building newSawmill = new Sawmill();
-		Building newForge = new Forge();
+		Building newForge = new Forge();		
+
+		Building newFoodStorage = new FoodWharehouse();
+		Building newWoodStorage = new WoodWharehouse();
+		Building newRockStorage = new RockWharehouse();
+		Building newSteeltorage = new SteelWharehouse();
+
 
 		newFarm.setKingdom(newKingdom);
 		newQuarry.setKingdom(newKingdom);
 		newSawmill.setKingdom(newKingdom);
-		newForge.setKingdom(newKingdom);
+		newForge.setKingdom(newKingdom);		
+
+		newFoodStorage.setKingdom(newKingdom);
+		newWoodStorage.setKingdom(newKingdom);
+		newRockStorage.setKingdom(newKingdom);
+		newSteeltorage.setKingdom(newKingdom);
+
 
 		buildingService.save(newFarm);
 		buildingService.save(newQuarry);
 		buildingService.save(newSawmill);
 		buildingService.save(newForge);
 		
+		buildingService.save(newFoodStorage);		
+		buildingService.save(newWoodStorage);
+		buildingService.save(newRockStorage);
+		buildingService.save(newSteeltorage);
+
 		
 		requirementsService.baseRequirements();
 		StaticRequirementsSingleton.getInstance().populate();

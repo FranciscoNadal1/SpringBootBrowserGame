@@ -41,13 +41,14 @@
 			
 		</div>
 		<div class="updateBuilding">
-
-			<a th:href="@{/levelUp/} + ${building.name}">
-				<button  class="btn btn-default btn-block" th:if="${building.level} != 0"
+<div th:if="${building.canLevelUp()}"></div>
+			<a th:if="${building.canLevelUp()}" th:href="@{/levelUp/} + ${building.name}">
+				<button  class="btn btn-default btn-block" th:if="${building.level} != 0 and ${building.canLevelUp()}"
 					th:name="'create' + ${building.name}">Level up building</button>
-				<button  class="btn btn-default btn-block" th:if="${building.level} == 0"
+				<button  class="btn btn-default btn-block" th:if="${building.level} == 0 and ${building.canLevelUp()}"
 					th:name="'create' + ${building.name}">Build</button>
 			</a>
+			<button class="btn btn-default btn-block"  disabled th:if="!${building.canLevelUp()}">Not enough resources</button>
 		</div>
 	</div>
 </div>

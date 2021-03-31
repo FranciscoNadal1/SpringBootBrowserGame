@@ -159,6 +159,8 @@ public abstract class Building{
 	public void setMaxLevel(int maxLevel) {
 		this.maxLevel = maxLevel;
 	}
+
+	protected abstract int getStoreCapacity();
 	
 	
 	

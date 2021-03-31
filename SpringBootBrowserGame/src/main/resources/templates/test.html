@@ -12,7 +12,7 @@
 		<div id="RealmTitle" th:text="${kingdom.kingdomName}"/>
 		<div id="buildings">
 		<div id="ProductionBuildingsHeader" class="header">
-			<h2>Buildings</h2>
+			<h2>Production buildings</h2>
 		</div>		
 			<div id="ProductionBuildings" class="row">
 				<div
@@ -26,6 +26,27 @@
 				</div>
 				<div
 					th:replace="commons/showBuilding :: menu(building=${buildings.get('Forge')})">
+				</div>
+			</div>
+
+		</div>
+		
+				<div id="buildings">
+		<div id="ProductionBuildingsHeader" class="header">
+			<h2>Storage buildings</h2>
+		</div>		
+			<div id="ProductionBuildings" class="row">
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Wood WhareHouse')})">
+				</div>
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Rock WhareHouse')})">
+				</div>
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Food WhareHouse')})">
+				</div>
+				<div
+					th:replace="commons/showBuilding :: menu(building=${buildings.get('Steel WhareHouse')})">
 				</div>
 			</div>
 

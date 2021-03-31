@@ -1,36 +1,33 @@
-package com.game.app.entity.buildings.production;
+package com.game.app.entity.buildings.storage;
 
 import javax.persistence.Entity;
 
 import com.game.app.entity.Building;
-import com.game.app.entity.GameProfile;
-import com.game.app.entity.Kingdom;
-import com.game.app.singleton.StaticRequirements;
-import com.game.app.singleton.StaticRequirementsSingleton;
 
 @Entity
-public class Sawmill extends Building {
+public class WoodWharehouse extends Building {
 
-	public Sawmill() {
+
+	public WoodWharehouse() {
 		this.hp = 2500;
 		this.level = 0;
-		this.name = "Sawmill";
+		this.name = "Wood WhareHouse";
 		this.portrait = "https://cdna.artstation.com/p/assets/images/images/009/783/810/large/fran-fdez-conceptos-ciencia-produccion.jpg?1520883100";
-		super.setMaxLevel(30);
+		super.setMaxLevel(10);
 	}
 
 	String description = "Chop da trees";
 
 	public String portrait;
 	//TODO This should be a resource OBJECT, eventually
-	int production;
+	int storeCapacity;
 	
 
 ////////////////////////////////////////////////////////////////////////////////////
+	public int getStoreCapacity() {
+//		return this.storeCapacity;
 
-	public int getProduction() {
-		//return production;
-		return this.level * 10;
+		return (int) (this.level * 2.5 * 1000);
 	}
 
 	@Override
@@ -41,12 +38,6 @@ public class Sawmill extends Building {
 	public String getDescription() {
 		return description;
 	}
-
-	@Override
-	protected int getStoreCapacity() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
+	
+	
 }

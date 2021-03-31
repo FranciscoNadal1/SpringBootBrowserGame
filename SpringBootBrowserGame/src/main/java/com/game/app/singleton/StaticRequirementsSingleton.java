@@ -73,6 +73,56 @@ public class StaticRequirementsSingleton {
 		requirementList.add(new StaticRequirements("Forge", 8, 800, 1000, 30, 0));
 		requirementList.add(new StaticRequirements("Forge", 9, 900, 1100, 40, 0));
 		requirementList.add(new StaticRequirements("Forge", 10, 1000, 1200, 50, 0));
+		
+///////////////////////////////////////////////////////////////////////////////////////
+////////////////		Storage
+		
+		requirementList.add(new StaticRequirements("Food WhareHouse", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 3, 3000, 500, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 4, 4000, 600, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 5, 5000, 700, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 6, 6000, 800, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 7, 7000, 900, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 8, 8000, 1000, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 9, 9000, 1100, 10, 0));
+		requirementList.add(new StaticRequirements("Food WhareHouse", 10, 10000, 1200, 10, 0));
+		
+
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 3, 3000, 500, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 4, 4000, 600, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 5, 5000, 700, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 6, 6000, 800, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 7, 7000, 900, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 8, 8000, 1000, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 9, 9000, 1100, 10, 0));
+		requirementList.add(new StaticRequirements("Rock WhareHouse", 10, 10000, 1200, 10, 0));
+		
+
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 3, 3000, 500, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 4, 4000, 600, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 5, 5000, 700, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 6, 6000, 800, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 7, 7000, 900, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 8, 8000, 1000, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 9, 9000, 1100, 10, 0));
+		requirementList.add(new StaticRequirements("Steel WhareHouse", 10, 10000, 1200, 10, 0));
+		
+
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 1, 1000, 200, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 2, 2000, 400, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 3, 3000, 500, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 4, 4000, 600, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 5, 5000, 700, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 6, 6000, 800, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 7, 7000, 900, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 8, 8000, 1000, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 9, 9000, 1100, 10, 0));
+		requirementList.add(new StaticRequirements("Wood WhareHouse", 10, 10000, 1200, 10, 0));
 
 		// requirementList.addAll(foo);
 	}

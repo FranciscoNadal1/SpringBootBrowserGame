@@ -19,10 +19,6 @@ public class GetRequirements {
 	
 	public Requirements getRequirement(String name, int level) {
 		Requirements requir = requirementsServiceDao.getRequirementByNameAndLevel(name, level);
-		System.out.println("NAME");
-		System.out.println(name);
-		System.out.println("LEVEL");
-		System.out.println(level);
 		return requir;
 	}
 }

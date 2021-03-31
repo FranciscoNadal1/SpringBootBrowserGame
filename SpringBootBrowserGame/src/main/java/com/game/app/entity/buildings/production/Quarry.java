@@ -51,4 +51,11 @@ public class Quarry extends Building {
 	public String getDescription() {
 		return description;
 	}
+
+
+	@Override
+	protected int getStoreCapacity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

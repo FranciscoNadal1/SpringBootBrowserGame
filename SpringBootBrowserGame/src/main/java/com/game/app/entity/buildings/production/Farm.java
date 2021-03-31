@@ -51,4 +51,10 @@ public class Farm extends Building {
 		return description;
 	}
 
+	@Override
+	protected int getStoreCapacity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
