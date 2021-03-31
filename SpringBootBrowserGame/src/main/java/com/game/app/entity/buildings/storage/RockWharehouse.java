@@ -12,7 +12,7 @@ public class RockWharehouse extends Building {
 		this.hp = 2500;
 		this.level = 0;
 		this.name = "Rock WhareHouse";
-		this.portrait = "https://cdna.artstation.com/p/assets/images/images/009/783/810/large/fran-fdez-conceptos-ciencia-produccion.jpg?1520883100";
+		this.portrait = "https://previews.123rf.com/images/elarina/elarina1704/elarina170401369/76534115-fondo-industrial-con-el-mont%C3%B3n-de-grava-delante-del-cielo-extracci%C3%B3n-de-grava-construcci%C3%B3n-de-carreteras-mont.jpg";
 		super.setMaxLevel(10);
 	}
 

@@ -12,7 +12,7 @@ public class SteelWharehouse extends Building {
 		this.hp = 2500;
 		this.level = 0;
 		this.name = "Steel WhareHouse";
-		this.portrait = "https://cdna.artstation.com/p/assets/images/images/009/783/810/large/fran-fdez-conceptos-ciencia-produccion.jpg?1520883100";
+		this.portrait = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX8OMpbsxRJ6Mb5hmCqGpL2CQkkUXOIYjfjg&usqp=CAU";
 		super.setMaxLevel(10);
 	}
 

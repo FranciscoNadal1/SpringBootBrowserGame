@@ -12,7 +12,7 @@ public class WoodWharehouse extends Building {
 		this.hp = 2500;
 		this.level = 0;
 		this.name = "Wood WhareHouse";
-		this.portrait = "https://cdna.artstation.com/p/assets/images/images/009/783/810/large/fran-fdez-conceptos-ciencia-produccion.jpg?1520883100";
+		this.portrait = "https://images.fineartamerica.com/images-medium-large-5/giant-wood-pile-with-shovel-and-ax-donna-wilson.jpg";
 		super.setMaxLevel(10);
 	}
 

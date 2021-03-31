@@ -12,7 +12,7 @@ public class FoodWharehouse extends Building {
 		this.hp = 2500;
 		this.level = 0;
 		this.name = "Food WhareHouse";
-		this.portrait = "https://cdna.artstation.com/p/assets/images/images/009/783/810/large/fran-fdez-conceptos-ciencia-produccion.jpg?1520883100";
+		this.portrait = "https://www.chinadaily.com.cn/travel/img/attachement/jpg/site1/20141202/f8bc126e491615e7ae8816.jpg";
 		super.setMaxLevel(10);
 	}
 
