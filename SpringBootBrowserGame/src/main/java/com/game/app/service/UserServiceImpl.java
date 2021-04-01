@@ -11,6 +11,7 @@ import com.game.app.dao.IGameProfile;
 import com.game.app.dao.IUser;
 import com.game.app.entity.GameProfile;
 import com.game.app.entity.User;
+import com.game.app.service.interfaces.IUserService;
 
 @Service
 public class UserServiceImpl implements IUserService {

@@ -1,5 +1,6 @@
 package com.game.app.entity;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -33,6 +34,12 @@ public class Kingdom {
 	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
 	@MapKey(name = "name")
 	private Map<String, Building> buildings;
+	
+
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
+	@MapKey(name = "name")
+	private List<Unit> units;
 	
 	private int wood;
 	private int rock;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.app.dao.IRequirements;
 import com.game.app.entity.Requirements;
+import com.game.app.service.interfaces.IRequirementsService;
 
 @Service
 public class RequirementsServiceImpl implements IRequirementsService {

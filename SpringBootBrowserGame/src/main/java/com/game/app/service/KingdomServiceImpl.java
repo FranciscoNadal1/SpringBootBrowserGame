@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.app.dao.IKingdom;
 import com.game.app.entity.Kingdom;
+import com.game.app.service.interfaces.IKingdomService;
 
 @Service
 public class KingdomServiceImpl implements IKingdomService {

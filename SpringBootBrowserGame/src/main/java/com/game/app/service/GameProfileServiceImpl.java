@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.app.dao.IGameProfile;
 import com.game.app.entity.GameProfile;
+import com.game.app.service.interfaces.IGameProfileService;
 
 @Service
 public class GameProfileServiceImpl implements IGameProfileService{

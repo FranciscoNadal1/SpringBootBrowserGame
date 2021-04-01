@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import com.game.app.entity.Kingdom;
 import com.game.app.entity.User;
-import com.game.app.service.IKingdomService;
-import com.game.app.service.IUserService;
+import com.game.app.service.interfaces.IKingdomService;
+import com.game.app.service.interfaces.IUserService;
 
 @Component
 public class ScheduledTasks {

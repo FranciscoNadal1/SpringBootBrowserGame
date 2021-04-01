@@ -16,15 +16,17 @@ import com.game.app.dao.IUser;
 import com.game.app.entity.Building;
 import com.game.app.entity.Kingdom;
 import com.game.app.entity.Requirements;
+import com.game.app.entity.Unit;
 import com.game.app.entity.User;
 import com.game.app.entity.buildings.production.Farm;
 import com.game.app.entity.buildings.production.Forge;
 import com.game.app.entity.buildings.production.Quarry;
 import com.game.app.entity.buildings.production.Sawmill;
 import com.game.app.globalFunctions.GlobalFunctions;
-import com.game.app.service.IBuildingService;
-import com.game.app.service.IRequirementsService;
-import com.game.app.service.IUserService;
+import com.game.app.service.interfaces.IBuildingService;
+import com.game.app.service.interfaces.IRequirementsService;
+import com.game.app.service.interfaces.IUnitService;
+import com.game.app.service.interfaces.IUserService;
 
 @Controller
 public class GameController {
@@ -42,38 +44,45 @@ public class GameController {
 	@Autowired
 	private IBuilding buildingDao;
 	@Autowired
-	private IBuildingService buildingServiceDao;
-	
+	private IBuildingService buildingServiceDao;	
 	@Autowired
 	private IRequirementsService requirementsServiceDao;
+	@Autowired
+	private IUnitService unitService;
 	
-	@GetMapping(value = "/buildings")
-	public String test(Model model) {
+	@Autowired
+	private GlobalFunctions globalFun;
+	
+	public Model addAttributesToModel(Model model) {
 		User currentUser = userDao.findById(1);
 		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
 		Map<String, Building> buildings= currentKingdom.getBuildings();
+//		List<Unit> units = unitService.getAllUnitsOfKingdom(currentKingdom);
+		List<Unit> units = unitService.getAllUnitsOfKingdom(currentKingdom);
+		List<List<Unit>> sortedListOfListUnits = globalFun.groupUnits(units);
 		
-//		currentUser.getGameProfile().getKingdomList()
-/*
-		User user = new User("admin");		
-		userDao.save(user);
-*/		
 		model.addAttribute("game", currentUser.getGameProfile());
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("kingdom", currentKingdom);
-		/*
-		List<Requirements> requirements = requirementsServiceDao.getAllRequirements();	
-		Requirements req  = requirements.get(1);
-			System.out.println(req.getName() + " - " + req.getLevel());
-			*/
-	//		Requirements requ = requirementsServiceDao.getRequirementByNameAndLevel("Farm", 1);
-			
-	//	Requirements requs = GlobalFunctions.getRequirement(requ.getName(), requ.getLevel());
-	//		System.out.println("AAAAA-" + requs.getName());
-			
+		model.addAttribute("kingdom", currentKingdom);
+		model.addAttribute("units", sortedListOfListUnits);
+	//	System.out.println(unitService);
+		return model;
+	}
+	
+	
+	@GetMapping(value = "/buildings")
+	public String buildings(Model model) {
+		addAttributesToModel(model);	
 		return "buildings";
 	}
-
+	
+	@GetMapping(value = "/units")
+	public String units(Model model) {
+		addAttributesToModel(model);			
+		return "units";
+	}
+	
 	@GetMapping(value = "/build/{building}")
 	public String buildFarm(Model model, @PathVariable(value = "building") String building) {
 		

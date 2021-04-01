@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.game.app.entity.Requirements;
-import com.game.app.service.IRequirementsService;
+import com.game.app.service.interfaces.IRequirementsService;
 
 @Configuration
 public class GetRequirements {

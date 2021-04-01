@@ -1,4 +1,4 @@
-package com.game.app.service;
+package com.game.app.service.interfaces;
 
 import com.game.app.entity.GameProfile;
 

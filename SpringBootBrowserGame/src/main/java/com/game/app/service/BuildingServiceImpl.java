@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.app.dao.IBuilding;
 import com.game.app.entity.Building;
+import com.game.app.service.interfaces.IBuildingService;
 
 @Service
 public class BuildingServiceImpl implements IBuildingService {

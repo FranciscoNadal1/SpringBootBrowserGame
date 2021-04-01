@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<body>
+	<header th:replace="commons/resourceBar.html"></header>
+	<div id="wrapper" class="">
+		<div th:replace="commons/sideMenu.html"></div>
+
+		<div id="Content" class="container col-10 float-right">
+			<div id="RealmTitle" th:text="${kingdom.kingdomName}" />
+			<div id="buildings">
+				<div id="ProductionBuildingsHeader" class="header">
+					<h2>Available units</h2>
+				</div>
+				
+				<div id="KingdomUnitList" class="row">
+					<div th:each="unit : ${units}">
+					
+						<div class="col-1" th:replace="commons/showUnit :: unitShow(unit=${unit})"></div>
+					</div>
+				</div>
+				
+			</div>			
+		</div>
+	</div>
+</body>
+</html>
