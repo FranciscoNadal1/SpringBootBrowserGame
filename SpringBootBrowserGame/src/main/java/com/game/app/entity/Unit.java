@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.game.app.entity.troops.Legionary;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -88,7 +90,14 @@ public abstract class Unit {
 		else
 			return false;
 	}
+////////////////////////////////////////////////////////
 	
+	
+	
+	
+	public static String getStaticPortrait() {
+		return "a";
+	}	
 ////////////////////////////////////////////////////////
 	public void setKingdom(Kingdom kingdom) {
 		this.kingdom = kingdom;

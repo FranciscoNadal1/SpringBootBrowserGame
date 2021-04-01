@@ -1,5 +1,7 @@
 package com.game.app.controllers;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,13 +17,13 @@ import com.game.app.dao.IKingdom;
 import com.game.app.dao.IUser;
 import com.game.app.entity.Building;
 import com.game.app.entity.Kingdom;
-import com.game.app.entity.Requirements;
 import com.game.app.entity.Unit;
 import com.game.app.entity.User;
 import com.game.app.entity.buildings.production.Farm;
 import com.game.app.entity.buildings.production.Forge;
 import com.game.app.entity.buildings.production.Quarry;
 import com.game.app.entity.buildings.production.Sawmill;
+import com.game.app.entity.troops.*;
 import com.game.app.globalFunctions.GlobalFunctions;
 import com.game.app.service.interfaces.IBuildingService;
 import com.game.app.service.interfaces.IRequirementsService;
@@ -82,26 +84,43 @@ public class GameController {
 		addAttributesToModel(model);			
 		return "units";
 	}
-	
+
+	@GetMapping(value = "/barracks")
+	public String barracks(Model model) {
+		addAttributesToModel(model);		
+		
+		// TODO this should obviously be a separate object
+		Map<String, String> legionary= new HashMap<String, String>();
+		Map<String, String> archer= new HashMap<String, String>();
+
+		/////////////////////////////////////////////////////////////////
+		legionary.put("portrait", Legionary.getStaticPortrait());
+		legionary.put("name", Legionary.getStaticName());
+		legionary.put("description", Legionary.getStaticDescription());
+		/////////////////////////////////////////////////////////////////
+
+		archer.put("portrait", Archer.getStaticPortrait());
+		archer.put("name", Archer.getStaticName());
+		archer.put("description", Archer.getStaticDescription());
+		
+		Map<String, Map<String,String>> availableUnits = new HashMap<String, Map<String,String>>();
+		
+		availableUnits.put("Legionary", legionary);
+		availableUnits.put("Archer", archer);
+		
+		
+		model.addAttribute("availableUnits", availableUnits);
+		
+		return "barracks";
+	}
+	@Deprecated
 	@GetMapping(value = "/build/{building}")
 	public String buildFarm(Model model, @PathVariable(value = "building") String building) {
 		
 		User currentUser = userDao.findById(1);
-
-	//	currentUser.getGameProfile()currentUser
 		
 		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
-		
-
-		model.addAttribute("game", currentUser.getGameProfile());
-		
-		
-//		currentKingdom.getBuildings().put("Farm", new Building());
-//		currentKingdom.getBuildings().add(new Building());
-//		kingdomDao.save(currentKingdom);
-//		kingdomDao.fi
-		
-//	currentUser.getGameProfile().
+		model.addAttribute("game", currentUser.getGameProfile());		
 		Building newBuilding = null;
 		switch(building) {
 		  case "Farm":
@@ -127,20 +146,51 @@ public class GameController {
 	@GetMapping(value = "/levelUp/{building}")
 	public String levelUpBuilding(Model model, @PathVariable(value = "building") String building) {
 		User currentUser = userDao.findById(1);
-		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
 		
+		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());		
 		Building levelingUpBuilding = currentKingdom.getBuildings().get(building);
-		System.out.println(levelingUpBuilding.getHp());
-		System.out.println(levelingUpBuilding.getLevel());
-		System.out.println(levelingUpBuilding.getHp());
-		/*
-		Building farm = new Farm();
-		farm = buildingDao.findByName("farm");
-*/
 		levelingUpBuilding.levelUp();
 		buildingServiceDao.save(levelingUpBuilding);
 
 		return "redirect:/buildings";
 	}	
 	
+	@GetMapping(value = "/train/{unitName}")
+	public String trainUnit(Model model, @PathVariable(value = "unitName") String unitName) {
+		User currentUser = userDao.findById(1);
+		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());		
+
+		Class cls;
+		try {
+			cls = Class.forName("com.game.app.entity.troops."+unitName);
+			Unit newUnit= (Unit) cls.getDeclaredConstructor().newInstance();
+			newUnit.setKingdom(currentKingdom);
+			unitService.newUnit(newUnit);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//newUnit.levelUp();
+		
+		return "redirect:/barracks";
+	}		
 }

@@ -5,19 +5,19 @@ import javax.persistence.Entity;
 import com.game.app.entity.Unit;
 
 @Entity
-public class Legionary extends Unit {
+public class Archer extends Unit {
 
-	public static String staticDescription = "Basic melee soldier";
-	public static String staticName = "Legionary";
-	public static String staticPortrait = "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/portrait-of-a-roman-legionary-18-andrea-mazzocchetti.jpg";
+	public static String staticDescription = "Basic ranged soldier";
+	public static String staticName = "Archer";
+	public static String staticPortrait = "https://lordsandknights.enjoyed.today/common/fansite_kit/units/NordicArcher.png";
 	
-	public Legionary() {
-		super.maxHp = 200;
-		super.maxArmor = 50;
+	public Archer() {
+		super.maxHp = 100;
+		super.maxArmor = 20;
 		super.maxMana = 0;
 		super.maxStamina = 10;
-		super.maxSpeed = 100;
-		super.maxAttack = 10;
+		super.maxSpeed = 120;
+		super.maxAttack = 8;
 		
 		super.currentHp = super.maxHp;
 		super.currentArmor = super.maxArmor;
@@ -25,14 +25,14 @@ public class Legionary extends Unit {
 		super.currentStamina = super.maxStamina;
 		super.currentSpeed = super.maxSpeed;
 		super.currentAttack = super.maxAttack;
-		super.description = Legionary.getStaticDescription();
+		super.description = Archer.getStaticDescription();
 		
-		super.isMelee = true;
-		super.isRanged = false;
+		super.isMelee = false;
+		super.isRanged = true;
 		
 		super.level = 1;
-		super.name = Legionary.getStaticName();
-		super.portrait = Legionary.getStaticPortrait();
+		super.name = Archer.getStaticName();
+		super.portrait = Archer.getStaticPortrait();
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public static String getStaticDescription() {

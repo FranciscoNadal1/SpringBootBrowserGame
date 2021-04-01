@@ -59,7 +59,7 @@ public class GlobalFunctions {
 		Kingdom newKingdom = new Kingdom(user.getUsername());
 		newKingdom.setGameProfile(user.getGameProfile());
 		kingdomDao.save(newKingdom);
-
+/*
 		Unit legionar = new Legionary();
 		legionar.setKingdom(newKingdom);
 		unitService.newUnit(legionar);
@@ -86,6 +86,7 @@ public class GlobalFunctions {
 		Unit legionar6 = new Legionary();
 		legionar6.setKingdom(newKingdom);
 		unitService.newUnit(legionar6);
+		*/
 //		addDefaultBuildings(user);
 
 		Building newFarm = new Farm();
@@ -178,7 +179,6 @@ public class GlobalFunctions {
 						if(actualUnit.equals(insideForUnit)) {
 							actualList.add(insideForUnit);
 							insideForList.clear();
-							System.out.println("This shit is equal");
 						}
 					}
 				
@@ -212,5 +212,8 @@ public class GlobalFunctions {
 		buildingService.save(newForge);
 
 	}
+	
+	
+	
 
 }
