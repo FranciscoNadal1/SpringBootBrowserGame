@@ -9,31 +9,25 @@
 
 		<div id="Content" class="container col-10 float-right">
 			<div id="RealmTitle" th:text="${kingdom.kingdomName}" />
+			
 			<div id="buildings">
 				<div id="ProductionBuildingsHeader" class="header">
 					<h2>Build units</h2>
 				</div>
-				
+
 				<div id="KingdomUnitList" class="row">
+					<div
+						th:replace="commons/showBuildableUnits :: unitShow(unit=${availableUnits.get('Commander')})">
+					</div>
 					<div
 						th:replace="commons/showBuildableUnits :: unitShow(unit=${availableUnits.get('Legionary')})">
 					</div>
 					<div
 						th:replace="commons/showBuildableUnits :: unitShow(unit=${availableUnits.get('Archer')})">
 					</div>
-				<!-- 
-				<div th:replace="commons/showBuildableUnits :: unitShow(unitName='Legionary')"/>		
-						 -->	
-				<!-- 
-				<div class="col-1" th:replace="showBuildableUnits :: unitShow"></div>
-					<div th:each="unit : ${units}">
-					
-						<div class="col-1" th:replace="commons/showUnit :: unitShow(unit=${unit})"></div>
-					</div>
-					 -->
 				</div>
-				
-			</div>			
+
+			</div>
 		</div>
 	</div>
 </body>

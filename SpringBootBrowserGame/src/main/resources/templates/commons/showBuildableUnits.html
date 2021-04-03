@@ -1,5 +1,5 @@
 <html>
-<div th:fragment="unitShow" id="BuildUnits">
+<div th:if="${kingdom.troopIsUnlocked(unit.name) == true}" th:fragment="unitShow" id="BuildUnits">
 <div th:text="${unit.name}" th:id="${unit.name}"></div>
 <div >
 			<div class="imageBuilding">
@@ -9,23 +9,6 @@
 				<a th:href="@{/train/} + ${unit.name}">
 					<button  class="btn btn-default btn-block" th:name="'create' + ${unit.name}">Train</button>
 				</a>
-<!-- 
-th:text="${T(com.game.app.entity.troops.Unit).getStaticPortrait()}
 
-
-	<div th:each="unit,iter : ${unit}" th:if="${iter.index >= iter.size-1}">
-
-		<div class="imageBuilding">
-			<img th:src="${unit.portrait}" />
-		</div>
-		<div class="unit" th:id="${unit.name}">
-			<div class="buildingText h5" th:text="${unit.name}"></div>
-			<div class="buildingText" th:text="'Level: ' + ${unit.level}"></div>
-
-
-		</div>
-		<div  class="buildingText" th:text="'Number: '+${iter.count}"></div>
-	</div> 
-	-->
 </div>
 </html>

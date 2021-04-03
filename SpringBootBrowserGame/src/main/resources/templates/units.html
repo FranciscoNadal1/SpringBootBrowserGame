@@ -11,6 +11,19 @@
 			<div id="RealmTitle" th:text="${kingdom.kingdomName}" />
 			<div id="buildings">
 				<div id="ProductionBuildingsHeader" class="header">
+					<h2>Commander List</h2>
+				</div>
+				
+				<div id="KingdomUnitList" class="row">
+					<div th:each="unit : ${commanderList}">					
+						<div class="col-1" th:replace="commons/showCommanders :: unitShow(unit=${unit})"></div>
+					</div>
+				</div>				
+			</div>	
+			
+			
+			<div id="buildings">
+				<div id="ProductionBuildingsHeader" class="header">
 					<h2>Available units</h2>
 				</div>
 				

@@ -1,0 +1,18 @@
+<html>
+<div th:fragment="unitShow">
+	<div th:each="unit,iter : ${unit}" th:if="${iter.index >= iter.size-1}">
+
+		<div class="imageBuilding">
+			<img th:src="${unit.portrait}" />
+		</div>
+		<div class="unit" th:id="${unit.name}">
+			<div class="buildingText h5" th:text="${unit.commanderName}"></div>
+			<div class="buildingText h5" th:text="${unit.name}"></div>
+			<div class="buildingText" th:text="'Level: ' + ${unit.level}"></div>
+
+
+		</div>
+		<div  class="buildingText" th:text="'Number: '+${iter.count}"></div>
+	</div>
+</div>
+</html>

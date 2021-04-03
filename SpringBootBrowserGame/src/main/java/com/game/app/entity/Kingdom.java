@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,8 @@ public class Kingdom {
 	@MapKey(name = "name")
 	private Map<String, Building> buildings;
 	
+	@ElementCollection
+	private Map<String, Boolean> unlockedTroop;
 
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
@@ -334,6 +337,32 @@ public class Kingdom {
 		
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public boolean troopIsUnlocked(String troopName) {
+		
+		try {
+		if(this.unlockedTroop.get(troopName))
+			return true;
+		else
+			return false;
+		}catch(Exception e) {
+			return false;
+		}		
+	}
+	public void unlockTroop(String troopName) {
+		
+		try {
+		if(this.unlockedTroop.get(troopName)) {
+			
+		}
+		else {
+			this.unlockedTroop.put(troopName, true);
+		}
+		}catch(Exception e) {
+			this.unlockedTroop.put(troopName, true);
+		}		
+	}	
+	
+	
 	public void resourcesGrow() {			
 
 		this.wood 		= 	fillResourceUntilMax(	this.getWood(), 		this.getExtraWoodGrowthRate() + this.baseWoodGrowthRate, 		this.getMaxWoodStored());

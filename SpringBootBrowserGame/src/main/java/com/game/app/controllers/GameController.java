@@ -59,16 +59,15 @@ public class GameController {
 		User currentUser = userDao.findById(1);
 		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
 		Map<String, Building> buildings= currentKingdom.getBuildings();
-//		List<Unit> units = unitService.getAllUnitsOfKingdom(currentKingdom);
 		List<Unit> units = unitService.getAllUnitsOfKingdom(currentKingdom);
 		List<List<Unit>> sortedListOfListUnits = globalFun.groupUnits(units);
+		List<Unit> commanderList = globalFun.getCommanderList(units);
 		
 		model.addAttribute("game", currentUser.getGameProfile());
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("kingdom", currentKingdom);
-		model.addAttribute("kingdom", currentKingdom);
 		model.addAttribute("units", sortedListOfListUnits);
-	//	System.out.println(unitService);
+		model.addAttribute("commanderList", commanderList);
 		return model;
 	}
 	
@@ -92,7 +91,8 @@ public class GameController {
 		// TODO this should obviously be a separate object
 		Map<String, String> legionary= new HashMap<String, String>();
 		Map<String, String> archer= new HashMap<String, String>();
-
+		Map<String, String> commander= new HashMap<String, String>();
+		
 		/////////////////////////////////////////////////////////////////
 		legionary.put("portrait", Legionary.getStaticPortrait());
 		legionary.put("name", Legionary.getStaticName());
@@ -102,11 +102,20 @@ public class GameController {
 		archer.put("portrait", Archer.getStaticPortrait());
 		archer.put("name", Archer.getStaticName());
 		archer.put("description", Archer.getStaticDescription());
+		/////////////////////////////////////////////////////////////////
+
+		commander.put("portrait", Commander.getStaticPortrait());
+		commander.put("name", Commander.getStaticName());
+		commander.put("description", Commander.getStaticDescription());
+		/////////////////////////////////////////////////////////////////
+		
+		
 		
 		Map<String, Map<String,String>> availableUnits = new HashMap<String, Map<String,String>>();
 		
 		availableUnits.put("Legionary", legionary);
 		availableUnits.put("Archer", archer);
+		availableUnits.put("Commander", commander);
 		
 		
 		model.addAttribute("availableUnits", availableUnits);
@@ -162,34 +171,17 @@ public class GameController {
 
 		Class cls;
 		try {
-			cls = Class.forName("com.game.app.entity.troops."+unitName);
-			Unit newUnit= (Unit) cls.getDeclaredConstructor().newInstance();
-			newUnit.setKingdom(currentKingdom);
-			unitService.newUnit(newUnit);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			if(currentKingdom.troopIsUnlocked(unitName)) {
+				cls = Class.forName("com.game.app.entity.troops."+unitName);
+				Unit newUnit= (Unit) cls.getDeclaredConstructor().newInstance();
+				newUnit.setKingdom(currentKingdom);
+				unitService.newUnit(newUnit);
+			}
+			else
+				throw new RuntimeException(unitName + " is not unlocked");
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		//newUnit.levelUp();
+		} 
 		
 		return "redirect:/barracks";
 	}		

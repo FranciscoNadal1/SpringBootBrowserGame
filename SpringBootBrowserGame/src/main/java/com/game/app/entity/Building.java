@@ -80,8 +80,20 @@ public abstract class Building{
 
 			level++;
 			this.production += 10;
+			unlockTroops(currentKingdom);
 		}
 
+	}
+	
+	public void unlockTroops(Kingdom currentKingdom) {
+		if(currentKingdom.getBuildings().get("Barracks").getLevel() == 1) {
+			currentKingdom.unlockTroop("Legionary");
+			currentKingdom.unlockTroop("Commander");
+		}
+		if(currentKingdom.getBuildings().get("Barracks").getLevel() == 2) {
+			currentKingdom.unlockTroop("Archer");
+		}
+		
 	}
 	
 	public boolean canLevelUp(StaticRequirements requirements) {

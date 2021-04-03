@@ -58,36 +58,10 @@ public class GlobalFunctions {
 		userDao.save(user);
 		Kingdom newKingdom = new Kingdom(user.getUsername());
 		newKingdom.setGameProfile(user.getGameProfile());
+		newKingdom.setWood(5000);
+		newKingdom.setRock(5000);
+		newKingdom.setSteel(5000);
 		kingdomDao.save(newKingdom);
-/*
-		Unit legionar = new Legionary();
-		legionar.setKingdom(newKingdom);
-		unitService.newUnit(legionar);
-
-		Unit legionar2 = new Legionary();
-		legionar2.setKingdom(newKingdom);
-		unitService.newUnit(legionar2);
-
-		Unit legionar3 = new Legionary();
-		legionar3.setKingdom(newKingdom);
-		legionar3.levelUp();
-		unitService.newUnit(legionar3);
-
-		Unit legionar4 = new Legionary();
-		legionar4.setKingdom(newKingdom);
-		legionar4.levelUp();
-		unitService.newUnit(legionar4);
-		
-		Unit legionar5 = new Legionary();
-		legionar5.setKingdom(newKingdom);
-		legionar5.levelUp();
-		unitService.newUnit(legionar5);
-
-		Unit legionar6 = new Legionary();
-		legionar6.setKingdom(newKingdom);
-		unitService.newUnit(legionar6);
-		*/
-//		addDefaultBuildings(user);
 
 		Building newFarm = new Farm();
 		Building newQuarry = new Quarry();
@@ -149,18 +123,28 @@ public class GlobalFunctions {
 		return unitService.getAllUnitsOfKingdom(kingdom);
 
 	}
-
+	public List<Unit> getCommanderList(List<Unit> splittedUnits) {
+		List<Unit> commanderList = new LinkedList<Unit>();
+		for (Unit unit : splittedUnits) {
+			if (unit.getName().equals("Commander")) {
+				commanderList.add(unit);
+			}
+		}
+		return commanderList;
+	}
 	public List<List<Unit>> groupUnits(List<Unit> splittedUnits) {
 		List<List<Unit>> groupedUnits = new LinkedList<List<Unit>>();
 
 		// Places every unit on a separate List
 		for (Unit unit : splittedUnits) {
-			List<Unit> singleUnit = new LinkedList<Unit>();
-			singleUnit.add(unit);
-			groupedUnits.add(singleUnit);
+			if (!unit.getName().equals("Commander")) {
+				List<Unit> singleUnit = new LinkedList<Unit>();
+				singleUnit.add(unit);
+				groupedUnits.add(singleUnit);
+			}
 		}
 
-		// Group individual units that are equal in the same list 
+		// Group individual units that are equal in the same list
 		for (int i = 0; i != groupedUnits.size(); i++) {
 			try {
 				System.out.println("-----------------------------------");
@@ -175,13 +159,13 @@ public class GlobalFunctions {
 
 						Unit insideForUnit = groupedUnits.get(a).get(0);
 						List<Unit> insideForList = groupedUnits.get(a);
-						
-						if(actualUnit.equals(insideForUnit)) {
+
+						if (actualUnit.equals(insideForUnit)) {
 							actualList.add(insideForUnit);
 							insideForList.clear();
 						}
 					}
-				
+
 			} catch (Exception e) {
 
 			}
@@ -212,8 +196,5 @@ public class GlobalFunctions {
 		buildingService.save(newForge);
 
 	}
-	
-	
-	
 
 }
