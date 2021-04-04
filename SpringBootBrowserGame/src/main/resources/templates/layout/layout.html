@@ -31,6 +31,45 @@
 			$('header').load(document.URL + ' #Resources');
 		}, 300);
 	});
+
+
+	
+	
+</script>
+<script type="text/javascript">
+
+var getUrl = window.location;
+var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+
+var root = baseUrl;
+var root = "http://localhost:8000/";
+var coordinates = [];
+var jsonData;
+var obj = {};
+
+$(document).ready(function(){
+
+	var commanderID = $('#CommanderID').text();
+	
+	$.ajax({
+		  url: root + '/returnFormationRest/' + commanderID,
+		  method: 'GET'
+		}).then(function(data) {
+	        	
+			for(x=0; x!=10;x++){
+				for(y=0; y!=10;y++){
+					var id ="x" + x +"-y"+ y ;
+					if(data.Commander.Coordinates[id] != undefined){
+
+						console.log(data.Commander.Coordinates[id].name)
+						$("#"+id).text((data.Commander.Coordinates[id].name));
+					}				
+				}		
+			}				
+		});
+});
+
 </script>
 
 

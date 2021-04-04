@@ -1,11 +1,14 @@
 package com.game.app.controllers;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +26,21 @@ import com.game.app.entity.buildings.production.Farm;
 import com.game.app.entity.buildings.production.Forge;
 import com.game.app.entity.buildings.production.Quarry;
 import com.game.app.entity.buildings.production.Sawmill;
-import com.game.app.entity.troops.*;
+import com.game.app.entity.troops.Archer;
+import com.game.app.entity.troops.Commander;
+import com.game.app.entity.troops.Legionary;
 import com.game.app.globalFunctions.GlobalFunctions;
 import com.game.app.service.interfaces.IBuildingService;
 import com.game.app.service.interfaces.IRequirementsService;
 import com.game.app.service.interfaces.IUnitService;
 import com.game.app.service.interfaces.IUserService;
+import com.game.app.war.Coordinate;
+import com.game.app.war.Formation;
+import com.game.app.war.ICoordinate;
+import com.game.app.war.ICoordinateService;
+import com.game.app.war.IFormation;
+
+import net.minidev.json.JSONObject;
 
 @Controller
 public class GameController {
@@ -45,6 +57,12 @@ public class GameController {
 	private IKingdom kingdomDao;
 	@Autowired
 	private IBuilding buildingDao;
+	@Autowired
+	private IFormation formationDao;
+	@Autowired
+	private ICoordinate coordinationDao;
+	@Autowired
+	private ICoordinateService coordinationServiceDao;
 	@Autowired
 	private IBuildingService buildingServiceDao;	
 	@Autowired
@@ -63,11 +81,13 @@ public class GameController {
 		List<List<Unit>> sortedListOfListUnits = globalFun.groupUnits(units);
 		List<Unit> commanderList = globalFun.getCommanderList(units);
 		
+		
 		model.addAttribute("game", currentUser.getGameProfile());
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("kingdom", currentKingdom);
 		model.addAttribute("units", sortedListOfListUnits);
 		model.addAttribute("commanderList", commanderList);
+		model.addAttribute("unitFormation", commanderList);
 		return model;
 	}
 	
@@ -83,6 +103,102 @@ public class GameController {
 		addAttributesToModel(model);			
 		return "units";
 	}
+	
+	@GetMapping(value = "/commander/{id}")
+	public String showCommander(Model model, @PathVariable(value = "id") int id) {
+		addAttributesToModel(model);			
+		Unit commander = unitService.getUnit(id);
+		model.addAttribute("commander", commander);
+
+		Formation formation =  ((Commander)commander).getTroopFormation();
+		model.addAttribute("formationMap", formation.getFormationPositions());
+
+
+		
+		List<Unit> unassignedUnit = unitService.findUnitsByCommanderIsNull();
+		List<Unit> assignedUnit = unitService.findUnitsAssignedToCommander(commander);
+		
+		
+		model.addAttribute("assignedUnits", globalFun.groupUnits(assignedUnit));
+		model.addAttribute("unassignedUnits", globalFun.groupUnits(unassignedUnit));
+		model.addAttribute("numberAssignedUnits", unitService.findUnitsAssignedToCommander(commander).size());
+		
+		return "commander";
+	}
+	
+	
+	@GetMapping(value = "/commander/{id}/assigned")
+	public String showCommanderAssigned(Model model, @PathVariable(value = "id") int id) {
+		model.addAttribute("assigned", true);
+		return showCommander(model, id);
+	}
+	@GetMapping(value = "/commander/{id}/formation")
+	public String showCommanderFormation(Model model, @PathVariable(value = "id") int id) {
+		model.addAttribute("formation", true);
+		return showCommander(model, id);
+	}	
+	
+	
+	@GetMapping(value = "/addToCommander/{idCommander}/unit/{idUnit}")
+	public String addUnitToCommander(Model model, @PathVariable(value = "idCommander") int idCommander, @PathVariable(value = "idUnit") int idUnit) {
+
+		Unit commander = unitService.getUnit(idCommander);
+		Unit unit = unitService.getUnit(idUnit);
+		
+		Formation formation =  ((Commander)commander).getTroopFormation();
+		
+	//	Coordinate coordinate = null;
+		boolean flag = false;
+		for(int x = 0; x <= formation.getNumberPositionsX(); x++){
+			for(int y = 0; y <= formation.getNumberPositionsY(); y++){		
+				Coordinate actualCoordinate = coordinationServiceDao.findByXAndY(formation, x, y);
+				if(!formation.getFormationPositions().containsKey(actualCoordinate)) {
+
+					//Coordinate coor = coordinationDao.findByXAndY(x, y);
+					if(!formation.hasUnit(actualCoordinate)) {	
+					//	if(!formation.getFormationPositions().get(new Coordinate(x,y)).n)	) {
+					
+						System.out.println("");
+						
+						addUnitTo(formation, unit, x, y);
+						flag = true;					
+					}
+				//	formation.getFormationPositions().put(coordinate, unit);
+				}
+				if(flag)break;
+			}
+			if(flag)break;
+		}
+		
+		
+		unit.setCommander(commander);
+		unitService.newUnit(unit);
+		return "redirect:/commander/" + idCommander;
+	}
+	
+	@Transient
+	public void addUnitTo(Formation formation, Unit unitToAdd, int x, int y) {
+		Coordinate coordinate = new Coordinate(x,y);		
+		formation.getFormationPositions().put(coordinate, unitToAdd);
+		/*
+		System.out.println(coordinate);
+		System.out.println("uh....");
+		*/
+			coordinationDao.save(coordinate);
+		formationDao.save(formation);
+	}
+	
+	@GetMapping(value = "/removeFromCommander/{idCommander}/unit/{idUnit}")
+	public String removeUnitFromCommander(Model model, @PathVariable(value = "idCommander") int idCommander, @PathVariable(value = "idUnit") int idUnit) {
+
+		Unit commander = unitService.getUnit(idCommander);
+		Unit unit = unitService.getUnit(idUnit);
+		
+		unit.setCommander(null);
+		unitService.newUnit(unit);
+		return "redirect:/commander/" + idCommander;
+	}	
+	
 
 	@GetMapping(value = "/barracks")
 	public String barracks(Model model) {
@@ -176,6 +292,13 @@ public class GameController {
 				Unit newUnit= (Unit) cls.getDeclaredConstructor().newInstance();
 				newUnit.setKingdom(currentKingdom);
 				unitService.newUnit(newUnit);
+				
+				if(newUnit.getName().equals("Commander")) {
+					Formation formation = new Formation(newUnit);
+					((Commander) newUnit).setTroopFormation(formation);
+					formationDao.save(formation);
+					
+				}
 			}
 			else
 				throw new RuntimeException(unitName + " is not unlocked");
@@ -184,5 +307,7 @@ public class GameController {
 		} 
 		
 		return "redirect:/barracks";
-	}		
+	}	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }

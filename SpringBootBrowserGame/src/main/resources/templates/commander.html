@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<body>
+	<header th:replace="commons/resourceBar.html"></header>
+	<div id="wrapper" class="">
+		<div th:replace="commons/sideMenu.html"></div>
+
+		<div id="Content" class="container col-10 float-right">
+			<div id="RealmTitle" th:text="${kingdom.kingdomName}" />
+			<div id="buildings">
+				<div id="ProductionBuildingsHeader" class="header">
+					<h2>Commander List</h2>
+				</div>
+
+				<div id="KingdomUnitList" class="row">
+					<div class="col-2">
+						<div th:text="${commander.commanderName}" />
+						<div id="CommanderID" class="d-none" th:text="${commander.id}" />
+						<div th:text="'Level : ' + ${commander.level}" />
+							<div class="imageBuilding">
+								<img th:src="${commander.portrait}" />
+							</div>
+							<div th:text="'HP : ' + ${commander.maxHp}" />
+							<div th:text="'Armor : ' + ${commander.maxArmor}" />
+							</br>
+							<div th:text="'Mana : ' + ${commander.maxMana}" />
+							<div th:text="'Stamina : ' + ${commander.maxStamina}" />
+							</br>
+							<div th:text="'Attack : ' + ${commander.maxAttack}" />
+							<div th:text="'Speed : ' + ${commander.maxSpeed}" />
+
+							</br>
+							<div th:text="'Assigned Units : ' + ${numberAssignedUnits}" />
+
+						</div>
+
+
+						<div class="col-10">
+							<div id="UnitsToAddToCommander" class="overflow-scroll">
+							
+					<div th:each="units : ${unassignedUnits}">
+									<div class="col-1" th:replace="commons/showUnitsForCommander :: unitShow(unit=${units},commId=${commander.id})"></div>
+					</div>
+							</div>
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+<div class="row align-center">
+
+
+<div class="col-6 btn btn-outline-primary shadow bg-white rouded btn-variant-1">
+<a th:href="@{/commander} + '/' + ${commander.id} + '/' + 'assigned'">
+Assigned Units
+
+</a>
+</div>
+
+<div class="col-6 btn btn-outline-primary shadow bg-white rouded btn-variant-1">
+<a th:href="@{/commander} + '/' + ${commander.id} + '/' + 'formation'">
+Formation
+</a>
+</div>
+
+</div>
+	<div>
+					<div th:if="${formation} != true" id="AssignedUnits" class="mt-4">
+	
+						<div th:each="unit : ${assignedUnits}" class="col-3 float-left">
+	
+							<div 
+								th:replace="commons/showUnitAssignedToCommander :: unitShow(unit=${unit},commId=${commander.id})">
+								</div>
+						</div>
+	
+					</div>
+					
+					<div th:if="${formation} == true" id="Formation" class="mt-4">
+								<div 
+								th:replace="commons/formation :: showFormation(unit=${unit},commId=${commander.id})">
+								</div>
+					
+					
+					</div>
+					
+	</div>				
+				
+				
+				
+			</div>
+		</div>
+</body>
+</html>

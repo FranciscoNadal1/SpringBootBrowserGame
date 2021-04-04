@@ -11,8 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.game.app.entity.troops.Legionary;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +24,7 @@ public abstract class Unit {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int Id;
+	public int id;
 	
 	public String name;
 	public String description;
@@ -53,6 +52,10 @@ public abstract class Unit {
 	@JoinColumn(name = "kingdom_id", referencedColumnName = "id")
 	private Kingdom kingdom;
 	
+	@ManyToOne
+	private Unit commander;
+	
+	 
 	public void levelUp() {
 
 		this.level +=1;
@@ -73,36 +76,46 @@ public abstract class Unit {
 		this.currentSpeed = this.maxSpeed;
 		this.currentAttack = this.maxAttack;
 	}
+	
+	
 ////////////////////////////////////////////////////////
 
 	public boolean equals(Unit unit) {
 
-		if(		unit.getLevel() 		== 		this.getLevel() &&
-				unit.getMaxHp() 		== 		this.getMaxHp() &&
-				unit.getMaxMana() 		== 		this.getMaxMana() &&
-				unit.getMaxStamina() 	== 		this.getMaxStamina() &&
-				unit.getMaxSpeed() 		== 		this.getMaxSpeed() &&
-				unit.getMaxAttack() 	== 		this.getMaxAttack() &&
-				unit.getName().equals(this.getName()) &&
+		if(		unit.getLevel() 		== 		this.getLevel() 		&&
+				unit.getMaxHp() 		== 		this.getMaxHp() 		&&
+				unit.getMaxMana() 		== 		this.getMaxMana() 		&&
+				unit.getMaxStamina() 	== 		this.getMaxStamina() 	&&
+				unit.getMaxSpeed() 		== 		this.getMaxSpeed() 		&&
+				unit.getMaxAttack() 	== 		this.getMaxAttack() 	&&
+				unit.getName()			.equals(this.getName()) 		&&
 				unit.getMaxArmor() 		== 		this.getMaxArmor() 
 			)
 			return true;
 		else
 			return false;
 	}
+
+	public void addToCommander(Unit commander) {
+		if(!(this.name=="Commander")) {
+			this.setCommander(commander);
+		}
+	}
 ////////////////////////////////////////////////////////
-	
-	
-	
+
+	public static void addUnitToCommander() {
+		
+	}
 	
 	public static String getStaticPortrait() {
 		return "a";
 	}	
 ////////////////////////////////////////////////////////
+
+
 	public void setKingdom(Kingdom kingdom) {
 		this.kingdom = kingdom;
-	}
-
+	}	
 
 
 	public String getName() {
@@ -118,7 +131,7 @@ public abstract class Unit {
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public int getLevel() {
@@ -183,6 +196,14 @@ public abstract class Unit {
 
 	public Kingdom getKingdom() {
 		return kingdom;
+	}
+
+	public Unit getCommander() {
+		return commander;
+	}
+
+	public void setCommander(Unit commander) {
+		this.commander = commander;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.game.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,21 @@ public class UnitServiceImpl implements IUnitService {
 	@Override
 	public List<Unit> getAllUnitsOfKingdom(Kingdom kingdom) {
 		return unitDao.findUnitByKingdom(kingdom);
+	}
+
+	@Override
+	public Unit getUnit(int id) {
+		return unitDao.findById(id);
+	}
+
+	@Override
+	public List<Unit> findUnitsAssignedToCommander(Unit commander) {
+		return (List<Unit>) unitDao.findUnitsByCommander(commander);
+	}
+
+	@Override
+	public List<Unit> findUnitsByCommanderIsNull() {
+		return (List<Unit>) unitDao.findUnitsByCommanderIsNull();
 	}
 
 }

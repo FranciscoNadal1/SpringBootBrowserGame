@@ -9,4 +9,7 @@ public interface IUnitService {
 	public void newUnit(Unit unit);
 	public List<Unit> getAllUnits();
 	public List<Unit> getAllUnitsOfKingdom(Kingdom kingdom);
+	public Unit getUnit(int id);
+	public List<Unit> findUnitsAssignedToCommander(Unit commander);
+	public List<Unit> findUnitsByCommanderIsNull();
 }

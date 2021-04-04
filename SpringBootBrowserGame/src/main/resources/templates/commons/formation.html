@@ -1,0 +1,15 @@
+<html>
+<div class="col-3 " th:fragment="showFormation">
+
+	<table class="formation">
+
+		<th:block th:each="x: ${#numbers.sequence(0, 9)}">
+			<tr>
+				<th:block th:each="y: ${#numbers.sequence(0, 9)}">
+					<td th:id="'x'+${x}+'-y'+${y}"></td>
+				</th:block>
+			</tr>
+		</th:block>
+	</table>
+</div>
+</html>

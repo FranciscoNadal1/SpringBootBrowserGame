@@ -4,9 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import com.game.app.entity.Unit;
+import com.game.app.war.Formation;
 
 @Entity
 public class Commander extends Unit {
@@ -15,6 +18,14 @@ public class Commander extends Unit {
 	public static String staticName = "Commander";
 	public static String staticPortrait = "https://c8.alamy.com/comp/BRA1HR/49-bc-roman-julius-caesar-cesar-leads-his-troops-from-horseback-across-BRA1HR.jpg";
 	public String commanderName;
+
+	/*
+	@OneToMany
+	private List<Unit> unitsAssigned;
+	
+	*/
+	@OneToOne(cascade = {CascadeType.ALL})
+	public Formation troopFormation;
 	
 	public Commander() {
 		super.maxHp = 500;
@@ -91,15 +102,31 @@ public class Commander extends Unit {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	
+	
+
+
+
+
+	@Override
+	public void addToCommander(Unit commander) {
+
+	}
+	
+	public Formation getTroopFormation() {
+		return troopFormation;
+	}
+
+	public void setTroopFormation(Formation troopFormation) {
+		this.troopFormation = troopFormation;
+	}
 
 	public void setCommanderName(String commanderName) {
 		this.commanderName = commanderName;
 	}
 
+	
 
-
-
-
+	
 	public static String getStaticName() {
 		return staticName;
 	}

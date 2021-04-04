@@ -3,6 +3,8 @@ package com.game.app.globalFunctions;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -25,11 +27,14 @@ import com.game.app.entity.buildings.storage.WoodWharehouse;
 import com.game.app.entity.buildings.troops.Barracks;
 import com.game.app.entity.buildings.troops.MageTower;
 import com.game.app.entity.buildings.troops.Stable;
+import com.game.app.entity.troops.Commander;
 import com.game.app.entity.troops.Legionary;
 import com.game.app.service.interfaces.IBuildingService;
 import com.game.app.service.interfaces.IRequirementsService;
 import com.game.app.service.interfaces.IUnitService;
 import com.game.app.singleton.StaticRequirementsSingleton;
+import com.game.app.war.Formation;
+import com.game.app.war.IFormation;
 
 @Component
 public class GlobalFunctions {
@@ -51,6 +56,9 @@ public class GlobalFunctions {
 
 	@Autowired
 	private IUnitService unitService;
+	
+	@Autowired
+	private IFormation formationDao;
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void mockNewUser() {
@@ -86,6 +94,8 @@ public class GlobalFunctions {
 		barracks.setKingdom(newKingdom);
 		mageTower.setKingdom(newKingdom);
 		stable.setKingdom(newKingdom);
+
+		addDefaultTroops(user);
 
 		buildingService.save(newFarm);
 		buildingService.save(newQuarry);
@@ -123,6 +133,7 @@ public class GlobalFunctions {
 		return unitService.getAllUnitsOfKingdom(kingdom);
 
 	}
+
 	public List<Unit> getCommanderList(List<Unit> splittedUnits) {
 		List<Unit> commanderList = new LinkedList<Unit>();
 		for (Unit unit : splittedUnits) {
@@ -132,6 +143,7 @@ public class GlobalFunctions {
 		}
 		return commanderList;
 	}
+
 	public List<List<Unit>> groupUnits(List<Unit> splittedUnits) {
 		List<List<Unit>> groupedUnits = new LinkedList<List<Unit>>();
 
@@ -194,6 +206,74 @@ public class GlobalFunctions {
 		buildingService.save(newQuarry);
 		buildingService.save(newSawmill);
 		buildingService.save(newForge);
+
+	}
+	public void addDefaultTroops(User user) {
+
+		User currentUser = user;
+
+		Kingdom newKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
+		
+		
+		Unit commander = new Commander();
+		commander.setKingdom(newKingdom);
+		unitService.newUnit(commander);
+		
+		Formation formation = new Formation();
+		((Commander) commander).setTroopFormation(formation);
+		formationDao.save(formation);
+		unitService.newUnit(commander);
+		
+		
+		
+
+		Unit legionar12 = new Legionary();
+		legionar12.setKingdom(newKingdom);
+		unitService.newUnit(legionar12);
+		
+
+		Unit legionar11 = new Legionary();
+		legionar11.setKingdom(newKingdom);
+		unitService.newUnit(legionar11);
+		
+
+		Unit legionar13 = new Legionary();
+		legionar13.setKingdom(newKingdom);
+		unitService.newUnit(legionar13);
+		
+
+		Unit legionar14 = new Legionary();
+		legionar14.setKingdom(newKingdom);
+		unitService.newUnit(legionar14);
+		
+
+		Unit legionar = new Legionary();
+		legionar.setKingdom(newKingdom);
+		unitService.newUnit(legionar);
+		
+		Unit legionar2 = new Legionary();
+		legionar2.setKingdom(newKingdom);
+		unitService.newUnit(legionar2);
+		
+		Unit legionar3 = new Legionary();
+		legionar3.setKingdom(newKingdom);
+		legionar3.levelUp();
+		
+		unitService.newUnit(legionar3);
+		Unit legionar4 = new Legionary();
+		legionar4.setKingdom(newKingdom);
+		legionar4.levelUp();
+		unitService.newUnit(legionar4);
+
+		Unit legionar5 = new Legionary();
+		legionar5.setKingdom(newKingdom);
+		legionar5.levelUp();
+		
+		unitService.newUnit(legionar5);
+		Unit legionar6 = new Legionary();
+		legionar6.setKingdom(newKingdom);
+		
+		unitService.newUnit(legionar6);
 
 	}
 

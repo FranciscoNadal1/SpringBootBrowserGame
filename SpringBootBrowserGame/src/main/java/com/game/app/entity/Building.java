@@ -90,7 +90,7 @@ public abstract class Building{
 			currentKingdom.unlockTroop("Legionary");
 			currentKingdom.unlockTroop("Commander");
 		}
-		if(currentKingdom.getBuildings().get("Barracks").getLevel() == 2) {
+		if(currentKingdom.getBuildings().get("Barracks").getLevel() == 1) {
 			currentKingdom.unlockTroop("Archer");
 		}
 		
