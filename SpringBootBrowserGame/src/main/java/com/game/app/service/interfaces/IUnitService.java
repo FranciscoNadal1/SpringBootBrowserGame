@@ -12,4 +12,7 @@ public interface IUnitService {
 	public Unit getUnit(int id);
 	public List<Unit> findUnitsAssignedToCommander(Unit commander);
 	public List<Unit> findUnitsByCommanderIsNull();
+	//////////////////////////////////////////////////////////////////
+	public void trainUnit(Kingdom currentKingdom, String unitName);
+	public void addUnitToCommander(Unit commander, Unit unit);
 }

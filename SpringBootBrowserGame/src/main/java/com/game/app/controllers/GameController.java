@@ -145,48 +145,11 @@ public class GameController {
 		Unit commander = unitService.getUnit(idCommander);
 		Unit unit = unitService.getUnit(idUnit);
 		
-		Formation formation =  ((Commander)commander).getTroopFormation();
+		unitService.addUnitToCommander(commander, unit);				
 		
-	//	Coordinate coordinate = null;
-		boolean flag = false;
-		for(int x = 0; x <= formation.getNumberPositionsX(); x++){
-			for(int y = 0; y <= formation.getNumberPositionsY(); y++){		
-				Coordinate actualCoordinate = coordinationServiceDao.findByXAndY(formation, x, y);
-				if(!formation.getFormationPositions().containsKey(actualCoordinate)) {
-
-					//Coordinate coor = coordinationDao.findByXAndY(x, y);
-					if(!formation.hasUnit(actualCoordinate)) {	
-					//	if(!formation.getFormationPositions().get(new Coordinate(x,y)).n)	) {
-					
-						System.out.println("");
-						
-						addUnitTo(formation, unit, x, y);
-						flag = true;					
-					}
-				//	formation.getFormationPositions().put(coordinate, unit);
-				}
-				if(flag)break;
-			}
-			if(flag)break;
-		}
-		
-		
-		unit.setCommander(commander);
-		unitService.newUnit(unit);
 		return "redirect:/commander/" + idCommander;
 	}
 	
-	@Transient
-	public void addUnitTo(Formation formation, Unit unitToAdd, int x, int y) {
-		Coordinate coordinate = new Coordinate(x,y);		
-		formation.getFormationPositions().put(coordinate, unitToAdd);
-		/*
-		System.out.println(coordinate);
-		System.out.println("uh....");
-		*/
-			coordinationDao.save(coordinate);
-		formationDao.save(formation);
-	}
 	
 	@GetMapping(value = "/removeFromCommander/{idCommander}/unit/{idUnit}")
 	public String removeUnitFromCommander(Model model, @PathVariable(value = "idCommander") int idCommander, @PathVariable(value = "idUnit") int idUnit) {
@@ -283,29 +246,9 @@ public class GameController {
 	@GetMapping(value = "/train/{unitName}")
 	public String trainUnit(Model model, @PathVariable(value = "unitName") String unitName) {
 		User currentUser = userDao.findById(1);
-		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());		
+		Kingdom currentKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());	
+		unitService.trainUnit(currentKingdom, unitName);
 
-		Class cls;
-		try {
-			if(currentKingdom.troopIsUnlocked(unitName)) {
-				cls = Class.forName("com.game.app.entity.troops."+unitName);
-				Unit newUnit= (Unit) cls.getDeclaredConstructor().newInstance();
-				newUnit.setKingdom(currentKingdom);
-				unitService.newUnit(newUnit);
-				
-				if(newUnit.getName().equals("Commander")) {
-					Formation formation = new Formation(newUnit);
-					((Commander) newUnit).setTroopFormation(formation);
-					formationDao.save(formation);
-					
-				}
-			}
-			else
-				throw new RuntimeException(unitName + " is not unlocked");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
 		return "redirect:/barracks";
 	}	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

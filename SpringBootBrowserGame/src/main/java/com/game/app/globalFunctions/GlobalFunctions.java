@@ -159,10 +159,7 @@ public class GlobalFunctions {
 		// Group individual units that are equal in the same list
 		for (int i = 0; i != groupedUnits.size(); i++) {
 			try {
-				System.out.println("-----------------------------------");
-				System.out.println(groupedUnits.get(i).get(0).getName());
-				System.out.println(groupedUnits.get(i).get(0).getLevel());
-
+				
 				Unit actualUnit = groupedUnits.get(i).get(0);
 				List<Unit> actualList = groupedUnits.get(i);
 
@@ -213,8 +210,20 @@ public class GlobalFunctions {
 		User currentUser = user;
 
 		Kingdom newKingdom = kingdomDao.findByGameProfile(currentUser.getGameProfile());
+
+		//newKingdom.unlockTroop("Legionary");
+		/*
+		newKingdom.unlockTroop("Commander");
+		newKingdom.unlockTroop("Archer");
+		*/
+		for(int i=0;i!=30;i++)
+			unitService.trainUnit(newKingdom, "Legionary");
+		for(int i=0;i!=30;i++)
+			unitService.trainUnit(newKingdom, "Archer");
+		for(int i=0;i!=2;i++)
+			unitService.trainUnit(newKingdom, "Commander");
 		
-		
+		/*
 		Unit commander = new Commander();
 		commander.setKingdom(newKingdom);
 		unitService.newUnit(commander);
@@ -274,7 +283,7 @@ public class GlobalFunctions {
 		legionar6.setKingdom(newKingdom);
 		
 		unitService.newUnit(legionar6);
-
+*/
 	}
 
 }
