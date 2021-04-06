@@ -39,6 +39,8 @@ import com.game.app.war.Formation;
 import com.game.app.war.ICoordinate;
 import com.game.app.war.ICoordinateService;
 import com.game.app.war.IFormation;
+import com.game.app.war.IFormationService;
+import com.game.app.war.SortFormations;
 
 import net.minidev.json.JSONObject;
 
@@ -60,6 +62,8 @@ public class GameController {
 	@Autowired
 	private IFormation formationDao;
 	@Autowired
+	private IFormationService formationServiceDao;
+	@Autowired
 	private ICoordinate coordinationDao;
 	@Autowired
 	private ICoordinateService coordinationServiceDao;
@@ -69,6 +73,8 @@ public class GameController {
 	private IRequirementsService requirementsServiceDao;
 	@Autowired
 	private IUnitService unitService;
+	@Autowired
+	private SortFormations sortFormation;
 	
 	@Autowired
 	private GlobalFunctions globalFun;
@@ -111,7 +117,12 @@ public class GameController {
 		model.addAttribute("commander", commander);
 
 		Formation formation =  ((Commander)commander).getTroopFormation();
+			//;
+		//model.addAttribute("formationMap", formationServiceDao.sortToTurtleFormation(formation.getFormationPositions()));
+		//model.addAttribute("formationMap", sortFormation.defaultformation(formation));
 		model.addAttribute("formationMap", formation.getFormationPositions());
+		//sortFormation.matrixShow(formation);		
+		//model.addAttribute("formationMap", formation.getFormationPositions());
 
 
 		
@@ -134,10 +145,33 @@ public class GameController {
 	}
 	@GetMapping(value = "/commander/{id}/formation")
 	public String showCommanderFormation(Model model, @PathVariable(value = "id") int id) {
+		
+		
 		model.addAttribute("formation", true);
 		return showCommander(model, id);
 	}	
-	
+	@GetMapping(value = "/commander/{id}/formation/default")
+	public String showCommanderFormationDefault(Model model, @PathVariable(value = "id") int id) {	
+
+		Unit commander = unitService.getUnit(id);
+		Formation formation =  ((Commander)commander).getTroopFormation();
+		
+		for(int i=0;i!=20;i++)
+			sortFormation.defaultformation(formation);
+		
+		model.addAttribute("formation", true);
+		return showCommanderFormation(model, id);
+	}	
+	@GetMapping(value = "/commander/{id}/formation/turtle")
+	public String showCommanderFormationTurtle(Model model, @PathVariable(value = "id") int id) {	
+		
+		Unit commander = unitService.getUnit(id);
+		Formation formation =  ((Commander)commander).getTroopFormation();
+		formationServiceDao.sortToTurtleFormation(formation.getFormationPositions());
+		
+		model.addAttribute("formation", true);
+		return showCommanderFormation(model, id);
+	}	
 	
 	@GetMapping(value = "/addToCommander/{idCommander}/unit/{idUnit}")
 	public String addUnitToCommander(Model model, @PathVariable(value = "idCommander") int idCommander, @PathVariable(value = "idUnit") int idUnit) {

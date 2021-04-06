@@ -67,7 +67,29 @@ public class UnitServiceImpl implements IUnitService {
 	}
 	
 //////////////////////////////////////////////////////////////////////////////////////////
-	
+	public void addUnit(Kingdom currentKingdom, String unitName) {
+		Class cls;
+		try {			
+				cls = Class.forName("com.game.app.entity.troops."+unitName);
+				Unit newUnit= (Unit) cls.getDeclaredConstructor().newInstance();
+				newUnit.setKingdom(currentKingdom);
+				unitService.newUnit(newUnit);
+				
+				if(newUnit.getName().equals("Commander")) {
+					Formation formation = new Formation(newUnit);
+					((Commander) newUnit).setTroopFormation(formation);
+					formationDao.save(formation);
+					
+					addUnitToCommander(newUnit,newUnit);
+					
+				}
+			
+			else
+				throw new RuntimeException(unitName + " is not unlocked");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
 	public void trainUnit(Kingdom currentKingdom, String unitName) {
 		Class cls;
 		try {
@@ -101,6 +123,36 @@ public class UnitServiceImpl implements IUnitService {
 		boolean flag = false;
 		for(int x = 0; x <= formation.getNumberPositionsX(); x++){
 			for(int y = 0; y <= formation.getNumberPositionsY(); y++){		
+				Coordinate actualCoordinate = coordinationServiceDao.findByXAndY(formation, x, y);
+				if(!formation.getFormationPositions().containsKey(actualCoordinate)) {
+
+					if(!formation.hasUnit(actualCoordinate)) {	
+					
+						System.out.println("");
+						
+						addUnitTo(formation, unit, x, y);
+						flag = true;					
+					}
+				}
+				if(flag)break;
+			}
+			if(flag)break;
+		}
+		
+		
+		unit.setCommander(commander);
+		unitService.newUnit(unit);
+		
+	}
+	
+	public void addUnitToCommander(Unit commander, Unit unit, int x, int y) {
+		
+		
+		Formation formation =  ((Commander)commander).getTroopFormation();
+		
+		boolean flag = false;
+		for(; x <= formation.getNumberPositionsX(); x++){
+			for(; y <= formation.getNumberPositionsY(); y++){		
 				Coordinate actualCoordinate = coordinationServiceDao.findByXAndY(formation, x, y);
 				if(!formation.getFormationPositions().containsKey(actualCoordinate)) {
 

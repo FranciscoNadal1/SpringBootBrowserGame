@@ -63,7 +63,23 @@ $(document).ready(function(){
 					if(data.Commander.Coordinates[id] != undefined){
 
 						console.log(data.Commander.Coordinates[id].name)
-						$("#"+id).text((data.Commander.Coordinates[id].name));
+						//	$("#"+id).text((data.Commander.Coordinates[id].name));
+						
+						if((data.Commander.Coordinates[id].name == "Commander")){
+							$("#"+id).addClass('bg-warning').addClass('border');
+							$("#"+id).text("C-"+data.Commander.Coordinates[id].level);
+						}
+						if((data.Commander.Coordinates[id].name == "Legionary")){
+							$("#"+id).addClass('bg-primary').addClass('border');
+							$("#"+id).text("L-"+data.Commander.Coordinates[id].level);
+						}
+						if((data.Commander.Coordinates[id].name == "Archer")){
+							$("#"+id).addClass('bg-secondary').addClass('border');
+							$("#"+id).text("A-"+data.Commander.Coordinates[id].level);
+						}
+						
+						
+						
 					}				
 				}		
 			}				

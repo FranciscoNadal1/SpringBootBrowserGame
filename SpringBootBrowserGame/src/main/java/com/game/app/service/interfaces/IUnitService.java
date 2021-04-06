@@ -14,5 +14,7 @@ public interface IUnitService {
 	public List<Unit> findUnitsByCommanderIsNull();
 	//////////////////////////////////////////////////////////////////
 	public void trainUnit(Kingdom currentKingdom, String unitName);
+	public void addUnit(Kingdom currentKingdom, String unitName);
 	public void addUnitToCommander(Unit commander, Unit unit);
+	public void addUnitToCommander(Unit commander, Unit unit, int x, int y);
 }

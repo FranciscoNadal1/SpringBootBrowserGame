@@ -217,11 +217,11 @@ public class GlobalFunctions {
 		newKingdom.unlockTroop("Archer");
 		*/
 		for(int i=0;i!=30;i++)
-			unitService.trainUnit(newKingdom, "Legionary");
+			unitService.addUnit(newKingdom, "Legionary");
 		for(int i=0;i!=30;i++)
-			unitService.trainUnit(newKingdom, "Archer");
+			unitService.addUnit(newKingdom, "Archer");
 		for(int i=0;i!=2;i++)
-			unitService.trainUnit(newKingdom, "Commander");
+			unitService.addUnit(newKingdom, "Commander");
 		
 		/*
 		Unit commander = new Commander();

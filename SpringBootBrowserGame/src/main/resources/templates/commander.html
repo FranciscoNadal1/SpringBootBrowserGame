@@ -70,6 +70,7 @@ Formation
 
 </div>
 	<div>
+
 					<div th:if="${formation} != true" id="AssignedUnits" class="mt-4">
 	
 						<div th:each="unit : ${assignedUnits}" class="col-3 float-left">
@@ -82,6 +83,14 @@ Formation
 					</div>
 					
 					<div th:if="${formation} == true" id="Formation" class="mt-4">
+						<a th:href="@{/commander} + '/' + ${commander.id} + '/' + 'formation/default'" >
+	<div class="float-right col-6 btn btn-outline-primary shadow bg-white rouded btn-variant-1">Change to default formation</div>
+	</a>
+	<a th:href="@{/commander} + '/' + ${commander.id} + '/' + 'formation/turtle'" >
+	<div  class="float-left col-6 btn btn-outline-primary shadow bg-white rouded btn-variant-1">Change to turtle formation</div>
+	</a>
+	
+	
 								<div 
 								th:replace="commons/formation :: showFormation(unit=${unit},commId=${commander.id})">
 								</div>
